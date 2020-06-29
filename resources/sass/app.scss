@@ -1,0 +1,46 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+
+
+html, body{
+	font-family: 'Roboto', sans-serif;
+}
+.title{
+	text-align: center;
+}
+a{
+	color: #000;
+	font-weight: bold;
+}
+.navbar-expand-md .navbar-nav .nav-link{
+	font-weight: bold;
+	font-size: 1rem;
+}
+
+.toolbar{
+	color: #000;
+}
+.toolbar i, .toolbar a{
+	font-size: 24px;
+}
+
+
+
+@media (min-width: 768px){
+
+	.navbar-expand-md .navbar-nav .nav-link {
+	    padding-right: 0.8rem;
+	    padding-left: 0.8rem;
+	}
+
+}
