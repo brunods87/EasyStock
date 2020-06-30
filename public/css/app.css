@@ -17057,6 +17057,20 @@ a {
   font-size: 24px;
 }
 
+.form-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-control {
+  border-radius: 0;
+}
+
+label {
+  margin-bottom: 0;
+}
+
 @media (min-width: 768px) {
   .navbar-expand-md .navbar-nav .nav-link {
     padding-right: 0.8rem;

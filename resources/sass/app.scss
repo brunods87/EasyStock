@@ -33,6 +33,17 @@ a{
 .toolbar i, .toolbar a{
 	font-size: 24px;
 }
+.form-group{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.form-control{
+	border-radius: 0;
+}
+label{
+	margin-bottom: 0;
+}
 
 
 

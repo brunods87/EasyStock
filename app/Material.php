@@ -11,8 +11,46 @@ class Material extends Model
 
     public function form()
     {
-        return Form::of('materials');
+        return Form::of('materials', function ($form) {
+
+            $attributes = [
+                'method' => 'POST',
+                'id'     => 'material-login-form',
+                'class'  => 'form-horizontal',
+            ];
+
+            $form->attributes($attributes);
+            // The form submit button label
+            $form->submit = 'Guardar';
+
+            $form->fieldset(function ($fieldset) {
+                $fieldset->control('input:text', 'name')
+                    ->label('Nome');
+                $fieldset->control('input:text', 'reference')
+                    ->label('Referência');
+                $fieldset->control('select', 'supplier_id')
+                    ->options(Supplier::all())
+                    ->label('Fornecedor');
+                $fieldset->control('select', 'category_id')
+                    ->options(Category::all())
+                    ->label('Categoria');
+                $fieldset->control('select', 'type_id')
+                    ->options(Type::all())
+                    ->label('Tipo');
+                $fieldset->control('input:number', 'price')
+                    ->label('Preço');
+                $fieldset->control('select', 'unity_id')
+                    ->options(Unity::all())
+                    ->label('Unidade');
+                $fieldset->control('input:number', 'discount')
+                    ->label('Desconto');
+                $fieldset->control('input:number', 'stock')
+                    ->label('Stock');
+            });
+
+        });
     }
+    
 
     public function category()
     {
