@@ -5,7 +5,9 @@
 <div class="container">
 
     <h1 class="title">FORNECEDORES</h1>
-
+    <div class="toolbar text-right">
+        <a href="{{ route('suppliers.create') }}"><i class="far fa-plus-square mr-3"></i>Adicionar</a>    
+    </div>
     <table class="table table-bordered data-table">
 
         <thead>
@@ -13,12 +15,10 @@
             <tr>
 
                 <th>No</th>
-
-                <th>Name</th>
-
-                <th>Email</th>
-
-                <th width="100px">Action</th>
+                <th>Nome</th>
+                <th>Desconto</th>
+                <th>NIF</th>
+                <th width="100px">Ações</th>
 
             </tr>
 
@@ -37,7 +37,7 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
 
 <script type="text/javascript">
   $(function () {
@@ -49,7 +49,8 @@
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'name', name: 'name'},
-            {data: 'email', name: 'email'},
+            {data: 'discount', name: 'discount'},
+            {data: 'nif', name: 'nif'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
@@ -57,4 +58,4 @@
   });
 </script>
 
-@endsection
+@endpush

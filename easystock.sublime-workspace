@@ -296,55 +296,99 @@
 	"buffers":
 	[
 		{
+			"file": "app/Supplier.php",
+			"settings":
+			{
+				"buffer_size": 1131,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "database/migrations/2020_06_20_120619_create_suppliers_table.php",
+			"settings":
+			{
+				"buffer_size": 720,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "app/Material.php",
 			"settings":
 			{
-				"buffer_size": 2404,
+				"buffer_size": 2436,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "vendor/orchestra/html/config/form.php",
+			"file": "app/Http/Controllers/MaterialController.php",
 			"settings":
 			{
-				"buffer_size": 1938,
+				"buffer_size": 1872,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "vendor/orchestra/html/resources/views/form/vertical.php",
+			"file": "app/Http/Controllers/SupplierController.php",
 			"settings":
 			{
-				"buffer_size": 1338,
+				"buffer_size": 2209,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "vendor/orchestra/html/resources/views/form/horizontal.php",
+			"file": "resources/views/suppliers/index.blade.php",
 			"settings":
 			{
-				"buffer_size": 1539,
+				"buffer_size": 1187,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "resources/views/layouts/app.blade.php",
+			"settings":
+			{
+				"buffer_size": 4923,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/js/app.js",
+			"settings":
+			{
+				"buffer_size": 1491,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "routes/web.php",
+			"settings":
+			{
+				"buffer_size": 3184,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/suppliers/update.blade.php",
+			"settings":
+			{
+				"buffer_size": 268,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "resources/views/materials/create.blade.php",
 			"settings":
 			{
-				"buffer_size": 111,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "resources/views/materials/index.blade.php",
-			"settings":
-			{
-				"buffer_size": 1618,
+				"buffer_size": 269,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -353,16 +397,25 @@
 			"file": "resources/sass/app.scss",
 			"settings":
 			{
-				"buffer_size": 944,
+				"buffer_size": 1137,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/suppliers/create.blade.php",
+			"settings":
+			{
+				"buffer_size": 271,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "resources/sass/_variables.scss",
 			"settings":
 			{
-				"buffer_size": 348,
+				"buffer_size": 369,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -445,38 +498,44 @@
 	"expanded_folders":
 	[
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Http",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Http/Controllers",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/database",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/database/migrations",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/js",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/sass",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/layouts",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/materials",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/vendor",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/vendor/orchestra",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/vendor/orchestra/html",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/vendor/orchestra/html/config",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/vendor/orchestra/html/resources",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/vendor/orchestra/html/resources/views",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/vendor/orchestra/html/resources/views/form"
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/suppliers",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/routes"
 	],
 	"file_history":
 	[
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Material.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/materials/create.blade.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/suppliers/create.blade.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Http/Controllers/SupplierController.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Http/Controllers/MaterialController.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/materials/index.blade.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/suppliers/index.blade.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/routes/web.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/sass/app.scss",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/sass/_variables.scss",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/vendor/orchestra/html/config/form.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/vendor/orchestra/html/resources/views/form/vertical.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/vendor/orchestra/html/resources/views/form/horizontal.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Job.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Supplier.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/config/app.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/routes/web.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Http/Controllers/MaterialController.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/materials/create.blade.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/database/migrations/2020_06_20_113502_create_materials_table.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/materials/index.blade.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/suppliers/index.blade.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/sass/app.scss",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/jobs/index.blade.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/invoices/index.blade.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/employees/index.blade.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/clients/index.blade.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/database/migrations/2020_06_20_141427_create_job_expenses_table.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Http/Controllers/SupplierController.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Http/Controllers/EmployeeController.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/JobExpense.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/config/database.php",
@@ -582,13 +641,7 @@
 		"/C/wamp64/www/ControloProducao/app/Providers/AppServiceProvider.php",
 		"/C/Users/Bruno/Documents/ServidorAmen/botagym/database/seeds/DatabaseSeeder.php",
 		"/C/Users/Bruno/Documents/ServidorAmen/botagym/resources/js/components/Calendar.vue",
-		"/C/Users/Bruno/Documents/ServidorAmen/botagym/resources/js/app.js",
-		"/C/Users/Bruno/Documents/ServidorAmen/botagym/resources/views/modals/writeModal.blade.php",
-		"/C/Users/Bruno/Documents/ServidorAmen/botagym/resources/views/pages/home.blade.php",
-		"/C/Users/Bruno/Documents/ServidorAmen/botagymproject.sublime-project",
-		"/C/Users/Bruno/Documents/ServidorAmen/botagym/resources/sass/app.scss",
-		"/C/Users/Bruno/Documents/ServidorAmen/botagym/webpack.mix.js",
-		"/C/Users/Bruno/Documents/ServidorAmen/botagym/database/migrations/2018_11_09_122738_create_treinos_table.php"
+		"/C/Users/Bruno/Documents/ServidorAmen/botagym/resources/js/app.js"
 	],
 	"find":
 	{
@@ -606,6 +659,17 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"yargs-parser",
+			"discount",
+			"email",
+			"supplier:",
+			"material",
+			"Material",
+			"material",
+			"$material",
+			"materials",
+			"material",
+			"materials",
 			"errorMessage",
 			"form",
 			"category_id",
@@ -630,24 +694,56 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 4,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/Material.php",
+					"file": "app/Supplier.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2404,
+						"buffer_size": 1131,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								384,
-								384
+								707,
+								707
+							],
+							[
+								862,
+								862
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 108.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "database/migrations/2020_06_20_120619_create_suppliers_table.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 720,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
@@ -657,27 +753,57 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 18.4,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/Material.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2436,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1443,
+								1443
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 270.4,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "vendor/orchestra/html/config/form.php",
+					"buffer": 3,
+					"file": "app/Http/Controllers/MaterialController.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1938,
+						"buffer_size": 1872,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1060,
-								1060
+								448,
+								569
 							]
 						],
 						"settings":
@@ -687,115 +813,87 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 54.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "vendor/orchestra/html/resources/views/form/vertical.php",
+					"buffer": 4,
+					"file": "app/Http/Controllers/SupplierController.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1338,
+						"buffer_size": 2209,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1010,
-								1010
+								1859,
+								1859
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 2,
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 162.4,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "vendor/orchestra/html/resources/views/form/horizontal.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1539,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								322,
-								322
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 162.4,
+						"translation.y": 648.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "resources/views/materials/create.blade.php",
+					"buffer": 5,
+					"file": "resources/views/suppliers/index.blade.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 111,
+						"buffer_size": 1187,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								73,
-								73
+								514,
+								514
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax"
+							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 378.4,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "resources/views/materials/index.blade.php",
+					"buffer": 6,
+					"file": "resources/views/layouts/app.blade.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1618,
+						"buffer_size": 4923,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								228,
-								228
+								4809,
+								4809
 							]
 						],
 						"settings":
@@ -808,24 +906,137 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "resources/sass/app.scss",
+					"buffer": 7,
+					"file": "resources/js/app.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 944,
+						"buffer_size": 1491,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								807,
-								807
+								1481,
+								1481
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 378.4,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "routes/web.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3184,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2758,
+								2758
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 676.8,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "resources/views/suppliers/update.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 268,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								247,
+								247
+							]
+						],
+						"settings":
+						{
+							"_anf_new": "",
+							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "resources/views/materials/create.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 269,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								77,
+								124
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "resources/sass/app.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1137,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								447,
+								447
 							]
 						],
 						"settings":
@@ -834,27 +1045,55 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 142.4,
+						"translation.y": 270.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "resources/sass/_variables.scss",
+					"buffer": 12,
+					"file": "resources/views/suppliers/create.blade.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 348,
+						"buffer_size": 271,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								144,
-								144
+								271,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "resources/sass/_variables.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 369,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								368,
+								368
 							]
 						],
 						"settings":
@@ -865,7 +1104,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 13,
 					"type": "text"
 				}
 			]
@@ -919,6 +1158,14 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"mate",
+				"app\\Material.php"
+			],
+			[
+				"suppl",
+				"app\\Supplier.php"
+			]
 		],
 		"width": 0.0
 	},

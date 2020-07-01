@@ -29,18 +29,18 @@ class Material extends Model
                 $fieldset->control('input:text', 'reference')
                     ->label('Referência');
                 $fieldset->control('select', 'supplier_id')
-                    ->options(Supplier::all())
+                    ->options(Supplier::pluck('name'))
                     ->label('Fornecedor');
                 $fieldset->control('select', 'category_id')
-                    ->options(Category::all())
+                    ->options(Category::pluck('name'))
                     ->label('Categoria');
                 $fieldset->control('select', 'type_id')
-                    ->options(Type::all())
+                    ->options(Type::pluck('name'))
                     ->label('Tipo');
                 $fieldset->control('input:number', 'price')
                     ->label('Preço');
                 $fieldset->control('select', 'unity_id')
-                    ->options(Unity::all())
+                    ->options(Unity::pluck('name'))
                     ->label('Unidade');
                 $fieldset->control('input:number', 'discount')
                     ->label('Desconto');

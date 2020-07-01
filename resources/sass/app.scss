@@ -6,6 +6,7 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import '~datatables/media/css/jquery.dataTables.css';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/solid';
 @import '~@fortawesome/fontawesome-free/scss/regular';
@@ -29,9 +30,16 @@ a{
 
 .toolbar{
 	color: #000;
+	margin-bottom: 1.5rem;
 }
 .toolbar i, .toolbar a{
 	font-size: 24px;
+}
+.toolbar a{
+	background-color: $mainColor;
+	color: #fff;
+	border: 1px solid $mainColor;
+	padding: .3rem 1.5rem;
 }
 .form-group{
 	display: flex;

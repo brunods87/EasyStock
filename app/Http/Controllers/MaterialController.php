@@ -33,4 +33,38 @@ class MaterialController extends Controller
         $form = $material->form();
         return view('materials.create', compact('form', 'material'));
     }
+
+    public function store(Request $request)
+    {
+        $data = $request->validate[
+            ['name' => 'required|string']
+        ];
+        Material::create($data);
+        return redirect('/materials');
+    }
+
+    public function edit($id)
+    {
+        $material = Material::findOrFail($id);
+        $form = $material->form();
+        return view('materials.update', compact('form', 'material'));
+    }
+
+    public function update($id, Request $request)
+    {
+        $data = $request->validate[
+            ['name' => 'required|string']
+        ];
+        $material = Material::findOrFail($id);
+        $material->update($data);
+        return redirect('/materials');
+    }
+
+    public function destroy(Request $request)
+    {
+        $id = $request['id'];
+        $material = Material::findOrFail($id);
+        $material->delete();
+        return ['msg' => 'O material foi eliminado'];
+    }
 }
