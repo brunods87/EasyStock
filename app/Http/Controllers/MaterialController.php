@@ -36,9 +36,19 @@ class MaterialController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate[
-            ['name' => 'required|string']
-        ];
+        $data = $request->validate([
+            'name' => 'required|string',
+            'reference' => 'required|string',
+            'supplier_id' => 'required',
+            'unity_id' => 'required',
+            'category_id' => 'required',
+            'type_id' => 'required',
+            'price' => 'required|numeric',
+            'discount' => 'required|numeric',
+            'tax' => 'required',
+            'stock' => 'required|numeric',
+            'job_id' => 'nullable'
+        ]);
         Material::create($data);
         return redirect('/materials');
     }
@@ -52,9 +62,19 @@ class MaterialController extends Controller
 
     public function update($id, Request $request)
     {
-        $data = $request->validate[
-            ['name' => 'required|string']
-        ];
+        $data = $request->validate([
+            'name' => 'required|string',
+            'reference' => 'required|string',
+            'supplier_id' => 'required',
+            'unity_id' => 'required',
+            'category_id' => 'required',
+            'type_id' => 'required',
+            'price' => 'required|numeric',
+            'discount' => 'required|numeric',
+            'tax' => 'required',
+            'stock' => 'required|numeric',
+            'job_id' => 'nullable'
+        ]);
         $material = Material::findOrFail($id);
         $material->update($data);
         return redirect('/materials');

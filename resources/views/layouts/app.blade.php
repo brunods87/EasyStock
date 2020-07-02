@@ -52,6 +52,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('suppliers.index') }}">Fornecedores</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('settings.index') }}">Definições</a>
+                            </li>
                         @endauth
                     </ul>
 

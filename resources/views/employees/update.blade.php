@@ -4,9 +4,9 @@
 @section('content')
 
 <div class="container py-5">
-	<h1 class="text-center">Adicionar Cliente</h1>
+	<h1 class="text-center">Editar Funcionário</h1>
 	<div class="toolbar text-right">
-        <a href="{{ route('clients.index') }}">Voltar</a>    
+        <a href="{{ route('employees.index') }}">Voltar</a>    
     </div>
 	{!! $form !!}
 </div>

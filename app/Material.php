@@ -21,7 +21,7 @@ class Material extends Model
 
             $form->attributes($attributes);
             // The form submit button label
-            $form->submit = 'Guardar';
+            $form->submit = $this->exists ? 'Guardar' : 'Criar';
 
             $form->fieldset(function ($fieldset) {
                 $fieldset->control('input:text', 'name')
@@ -37,15 +37,30 @@ class Material extends Model
                 $fieldset->control('select', 'type_id')
                     ->options(Type::pluck('name'))
                     ->label('Tipo');
+                $attributes = [
+                    'step' => 0.01,
+                ];
                 $fieldset->control('input:number', 'price')
-                    ->label('Preço');
+                    ->label('Preço')
+                    ->attributes($attributes);
                 $fieldset->control('select', 'unity_id')
                     ->options(Unity::pluck('name'))
                     ->label('Unidade');
                 $fieldset->control('input:number', 'discount')
-                    ->label('Desconto');
+                    ->label('Desconto')
+                    ->attributes($attributes);
                 $fieldset->control('input:number', 'stock')
-                    ->label('Stock');
+                    ->label('Stock')
+                    ->attributes($attributes);
+                $fieldset->control('select', 'tax')
+                    ->options(['0' => '0%', Setting::first()->tax_value => Setting::first()->tax_value.'%'])
+                    ->label('IVA');
+                $jobs = Job::all()->map(function($item, $key){
+                    return [$item->id => 'Ref: '.$item->reference.' Nome: '.$item->name];
+                });
+                $fieldset->control('select', 'job_id')
+                    ->options($jobs)
+                    ->label('Folha de Obra');
             });
 
         });

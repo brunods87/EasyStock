@@ -6,6 +6,9 @@
 
     <h1 class="title">MATERIAIS</h1>
     <div class="toolbar text-right">
+        <a href="{{ route('unities.index') }}"><i class="fas fa-list mr-3"></i>Unidades</a>
+        <a href="{{ route('types.index') }}"><i class="fas fa-list mr-3"></i>Tipos</a>
+        <a href="{{ route('categories.index') }}"><i class="fas fa-list mr-3"></i>Categorias</a>    
         <a href="{{ route('materials.create') }}"><i class="far fa-plus-square mr-3"></i>Adicionar</a>    
     </div>
     
@@ -44,7 +47,7 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
 
 <script type="text/javascript">
   $(function () {
@@ -70,4 +73,4 @@
   });
 </script>
 
-@endsection
+@endpush

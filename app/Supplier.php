@@ -21,7 +21,7 @@ class Supplier extends Model
 
             $form->attributes($attributes);
             // The form submit button label
-            $form->submit = 'Guardar';
+            $form->submit = $this->exists ? 'Guardar' : 'Criar';
 
             $form->fieldset(function ($fieldset) {
                 $fieldset->control('input:text', 'name')

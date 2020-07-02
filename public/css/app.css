@@ -17471,6 +17471,14 @@ a {
   font-weight: bold;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
+.btn {
+  border-radius: 0;
+}
+
 .navbar-expand-md .navbar-nav .nav-link {
   font-weight: bold;
   font-size: 1rem;
@@ -17479,11 +17487,14 @@ a {
 .toolbar {
   color: #000;
   margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .toolbar i,
 .toolbar a {
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .toolbar a {
@@ -17491,6 +17502,10 @@ a {
   color: #fff;
   border: 1px solid #3490dc;
   padding: 0.3rem 1.5rem;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  margin-left: 0.5rem;
 }
 
 .form-group {
