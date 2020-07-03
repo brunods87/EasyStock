@@ -43,7 +43,7 @@ class EmployeeController extends Controller
             'name' => 'required|string',
             'salary' => 'numeric',
             'value_hour' => 'numeric',
-            'observations' => 'string'
+            'observations' => 'nullable|string'
         ]);
         Employee::create($data);
         return redirect('/employees');
@@ -64,7 +64,7 @@ class EmployeeController extends Controller
             'name' => 'required|string',
             'salary' => 'numeric',
             'value_hour' => 'numeric',
-            'observations' => 'text'
+            'observations' => 'nullable|string'
         ]);
         $employee = Employee::findOrFail($id);
         $employee->update($data);

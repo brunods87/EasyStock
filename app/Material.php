@@ -25,42 +25,53 @@ class Material extends Model
 
             $form->fieldset(function ($fieldset) {
                 $fieldset->control('input:text', 'name')
-                    ->label('Nome');
+                    ->label('Nome')
+                    ->value($this->name ?? '');
                 $fieldset->control('input:text', 'reference')
-                    ->label('Referência');
+                    ->label('Referência')
+                    ->value($this->reference ?? '');
                 $fieldset->control('select', 'supplier_id')
-                    ->options(Supplier::pluck('name'))
-                    ->label('Fornecedor');
+                    ->options(['0' => ''] + Supplier::pluck('name', 'id')->toArray())
+                    ->label('Fornecedor')
+                    ->value($this->supplier_id ?? '');
                 $fieldset->control('select', 'category_id')
-                    ->options(Category::pluck('name'))
-                    ->label('Categoria');
+                    ->options(['0' => ''] + Category::pluck('name', 'id')->toArray())
+                    ->label('Categoria')
+                    ->value($this->category_id ?? '');
                 $fieldset->control('select', 'type_id')
-                    ->options(Type::pluck('name'))
-                    ->label('Tipo');
+                    ->options(['0' => ''] + Type::pluck('name', 'id')->toArray())
+                    ->label('Tipo')
+                    ->value($this->type_id ?? '');
                 $attributes = [
                     'step' => 0.01,
                 ];
                 $fieldset->control('input:number', 'price')
                     ->label('Preço')
+                    ->value($this->price ?? 0.00)
                     ->attributes($attributes);
                 $fieldset->control('select', 'unity_id')
-                    ->options(Unity::pluck('name'))
-                    ->label('Unidade');
+                    ->options(['0' => ''] + Unity::pluck('name', 'id')->toArray())
+                    ->label('Unidade')
+                    ->value($this->unity_id ?? '');
                 $fieldset->control('input:number', 'discount')
                     ->label('Desconto')
+                    ->value($this->discount ?? 0)
                     ->attributes($attributes);
                 $fieldset->control('input:number', 'stock')
                     ->label('Stock')
+                    ->value($this->stock ?? 0)
                     ->attributes($attributes);
                 $fieldset->control('select', 'tax')
                     ->options(['0' => '0%', Setting::first()->tax_value => Setting::first()->tax_value.'%'])
-                    ->label('IVA');
+                    ->label('IVA')
+                    ->value($this->tax ?? 0);
                 $jobs = Job::all()->map(function($item, $key){
                     return [$item->id => 'Ref: '.$item->reference.' Nome: '.$item->name];
                 });
                 $fieldset->control('select', 'job_id')
                     ->options($jobs)
-                    ->label('Folha de Obra');
+                    ->label('Folha de Obra')
+                    ->value($this->job_id ?? '');
             });
 
         });
@@ -97,12 +108,4 @@ class Material extends Model
         return $this->belongsTo(Type::class);
     }
 
-    public function tax()
-    {
-    	if ($this->taxable){
-	        $settings = Setting::first();
-	        return $settings->tax_value;
-	    }
-	    return 0;
-    }
 }

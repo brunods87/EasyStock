@@ -100,6 +100,7 @@
         <footer>
 
         </footer>
+        @yield('modals')
     </div>
      <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

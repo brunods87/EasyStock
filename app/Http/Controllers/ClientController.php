@@ -40,7 +40,7 @@ class ClientController extends Controller
         $data = $request->validate([
             'name' => 'required|string',
             'nif' => 'numeric',
-            'address' => 'text'
+            'address' => 'string'
         ]);
         Client::create($data);
         return redirect('/clients');
@@ -57,8 +57,8 @@ class ClientController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string',
-            'discount' => 'nullable',
-            'nif' => 'numeric'
+            'nif' => 'numeric',
+            'address' => 'string'
         ]);
         $client = Client::findOrFail($id);
         $client->update($data);

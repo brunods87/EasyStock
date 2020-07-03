@@ -5,7 +5,9 @@
 <div class="container">
 
     <h1 class="title">FATURAS</h1>
-
+    <div class="toolbar text-right">
+        <button type="button" class="" data-toggle="modal" data-target="#createInvoiceModal"><i class="far fa-plus-square mr-3"></i>Adicionar</button> 
+    </div>
     <table class="table table-bordered data-table">
 
         <thead>
@@ -37,7 +39,13 @@
 
 @endsection
 
-@section('scripts')
+@section('modals')
+
+    @include('modals.createInvoiceModal')
+
+@endsection
+
+@push('scripts')
 
 <script type="text/javascript">
   $(function () {
@@ -57,4 +65,4 @@
   });
 </script>
 
-@endsection
+@endpush

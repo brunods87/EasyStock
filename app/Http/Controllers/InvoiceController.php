@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Invoice;
 use Illuminate\Http\Request;
+use DataTables;
 
 class InvoiceController extends Controller
 {
@@ -11,7 +12,7 @@ class InvoiceController extends Controller
     {
         if ($request->ajax()) {
             $data = Invoice::latest()->get();
-            return Datatables::of($data)
+            return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
    

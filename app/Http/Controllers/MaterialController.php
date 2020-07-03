@@ -14,10 +14,22 @@ class MaterialController extends Controller
             $data = Material::latest()->get();
             return Datatables::of($data)
                     ->addIndexColumn()
+                    ->editColumn('supplier_id', function($row){
+                        return $row->supplier->name;
+                    })
+                    ->editColumn('unity_id', function($row){
+                        return $row->unity->name;
+                    })
+                    ->editColumn('type_id', function($row){
+                        return $row->type->name;
+                    })
+                    ->editColumn('category_id', function($row){
+                        return $row->category->name;
+                    })
                     ->addColumn('action', function($row){
    
-                           $btn = '<a href="javascript:void(0)" title="Editar" class="edit btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>';
-     
+                           $btn = '<a href="'.route('materials.update', ['id' => $row->id]).'" title="Editar" class="edit btn btn-primary btn-sm mr-3"><i class="fas fa-edit"></i></a>';
+                            $btn .= '<a href="javascript:void(0)" data-id="'.$row->id.'" title="Eliminar" class="delete btn btn-primary btn-sm"><i class="fas fa-trash"></i></a>';
                             return $btn;
                     })
                     ->rawColumns(['action'])
@@ -75,6 +87,7 @@ class MaterialController extends Controller
             'stock' => 'required|numeric',
             'job_id' => 'nullable'
         ]);
+
         $material = Material::findOrFail($id);
         $material->update($data);
         return redirect('/materials');

@@ -26,6 +26,7 @@
                 <th>Unidade</th>
                 <th>Fornecedor</th>
                 <th>Categoria</th>
+                <th>Tipo</th>
                 <th>Stock</th>
                 <th>Obra</th>
                 <th width="100px">Ações</th>
@@ -62,12 +63,14 @@
             {data: 'reference', name: 'reference'},
             {data: 'price', name: 'price'},
             {data: 'unity_id', name: 'unity'},
-            {data: 'suplier_id', name: 'suplier_id'},
+            {data: 'supplier_id', name: 'supplier_id'},
             {data: 'category_id', name: 'category_id'},
+            {data: 'type_id', name: 'type_id'},
             {data: 'stock', name: 'stock'},
             {data: 'job_id', name: 'job_id'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
-        ]
+        ],
+        "order": [[ 1, "asc" ]]
     });
     
   });

@@ -37,7 +37,7 @@ Route::group( ['middleware' => 'auth' ], function()
 	Route::get('/materials', 'MaterialController@index')->name('materials.index');
 	Route::get('/materials/create', 'MaterialController@create')->name('materials.create');
 	Route::post('/materials/create', 'MaterialController@store');
-	Route::get('/materials/update', 'MaterialController@edit')->name('materials.update');
+	Route::get('/materials/update/{id}', 'MaterialController@edit')->name('materials.update');
 	Route::post('/materials/update/{id}', 'MaterialController@update');
 	Route::post('/materials', 'MaterialController@destroy');
 
@@ -45,21 +45,21 @@ Route::group( ['middleware' => 'auth' ], function()
 		Route::get('/categories', 'CategoryController@index')->name('categories.index');
 		Route::get('/categories/create', 'CategoryController@create')->name('categories.create');
 		Route::post('/categories/create', 'CategoryController@store');
-		Route::get('/categories/update', 'CategoryController@edit')->name('categories.update');
+		Route::get('/categories/update/{id}', 'CategoryController@edit')->name('categories.update');
 		Route::post('/categories/update/{id}', 'CategoryController@update');
 		Route::post('/categories', 'CategoryController@destroy');
 		//TYPES
 		Route::get('/types', 'TypeController@index')->name('types.index');
 		Route::get('/types/create', 'TypeController@create')->name('types.create');
 		Route::post('/types/create', 'TypeController@store');
-		Route::get('/types/update', 'TypeController@edit')->name('types.update');
+		Route::get('/types/update{id}', 'TypeController@edit')->name('types.update');
 		Route::post('/types/update/{id}', 'TypeController@update');
 		Route::post('/types', 'TypeController@destroy');
 		//UNITIES
 		Route::get('/unities', 'UnityController@index')->name('unities.index');
 		Route::get('/unities/create', 'UnityController@create')->name('unities.create');
 		Route::post('/unities/create', 'UnityController@store');
-		Route::get('/unities/update', 'UnityController@edit')->name('unities.update');
+		Route::get('/unities/update{id}', 'UnityController@edit')->name('unities.update');
 		Route::post('/unities/update/{id}', 'UnityController@update');
 		Route::post('/unities', 'UnityController@destroy');
 
