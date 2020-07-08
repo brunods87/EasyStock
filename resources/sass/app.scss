@@ -19,6 +19,10 @@ html, body{
 .title{
 	text-align: center;
 }
+h1{
+	font-size: 1.8rem;
+	text-transform: uppercase;
+}
 a{
 	color: #000;
 	font-weight: bold;
@@ -28,6 +32,9 @@ a:hover{
 }
 .btn{
 	border-radius: 0;
+}
+.navbar-brand img{
+	max-height: 80px;
 }
 .navbar-expand-md .navbar-nav .nav-link{
 	font-weight: bold;
@@ -40,6 +47,7 @@ a:hover{
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+	margin-top: 1rem;
 }
 .toolbar i, .toolbar a{
 	font-size: 20px;
@@ -65,14 +73,29 @@ a:hover{
 label{
 	margin-bottom: 0;
 }
+.view-table{
 
+	th{
+		text-align: right;
+		width: 30%;
+	}
+	td{
+		width: 70%;
+	}
 
+}
+.data-table-modal{
+	width: 100%!important;
+}
 
 @media (min-width: 768px){
 
 	.navbar-expand-md .navbar-nav .nav-link {
 	    padding-right: 0.8rem;
 	    padding-left: 0.8rem;
+	}
+	.modal-dialog{
+		max-width: 90%;
 	}
 
 }

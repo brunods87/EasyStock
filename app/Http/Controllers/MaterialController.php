@@ -100,4 +100,34 @@ class MaterialController extends Controller
         $material->delete();
         return ['msg' => 'O material foi eliminado'];
     }
+
+    public function insert(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Material::latest()->get();
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->editColumn('supplier_id', function($row){
+                        return $row->supplier->name;
+                    })
+                    ->editColumn('unity_id', function($row){
+                        return $row->unity->name;
+                    })
+                    ->editColumn('type_id', function($row){
+                        return $row->type->name;
+                    })
+                    ->editColumn('category_id', function($row){
+                        return $row->category->name;
+                    })
+                    ->addColumn('action', function($row){
+   
+                           $btn = '<button type="button" data-id="'.$row->id.'" class="btn btn-primary" onClick="insertMaterial(this)"><i class="fas fa-plus-square"></i></button>';
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+      
+        return view('materials/index');
+    }
 }

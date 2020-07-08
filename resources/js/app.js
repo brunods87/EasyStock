@@ -39,15 +39,17 @@ $.ajaxSetup({
 
 $(document).on("click", ".data-table a.delete", function(){
 
-	var id = $(this).data('id');
-	var path = location.href;
-	$.ajax({
-		type: 'POST',
-		url: path,
-		data: {id: id}
-	}).done(function(response){
-		alert(response.msg);
-		location.reload();
-	});
+	if (confirm("Eliminar esta linha?")){
+		var id = $(this).data('id');
+		var path = location.href;
+		$.ajax({
+			type: 'POST',
+			url: path,
+			data: {id: id}
+		}).done(function(response){
+			alert(response.msg);
+			location.reload();
+		});
+	}
 
 });

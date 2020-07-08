@@ -40,6 +40,7 @@ Route::group( ['middleware' => 'auth' ], function()
 	Route::get('/materials/update/{id}', 'MaterialController@edit')->name('materials.update');
 	Route::post('/materials/update/{id}', 'MaterialController@update');
 	Route::post('/materials', 'MaterialController@destroy');
+	Route::get('/materials/insert', 'MaterialController@insert')->name('materials.insert');
 
 		//CATEGORIES
 		Route::get('/categories', 'CategoryController@index')->name('categories.index');
@@ -77,7 +78,11 @@ Route::group( ['middleware' => 'auth' ], function()
 	Route::post('/invoices/create', 'InvoiceController@store');
 	Route::get('/invoices/update/{id}', 'InvoiceController@edit')->name('invoices.update');
 	Route::post('/invoices/update/{id}', 'InvoiceController@update');
+	Route::get('/invoices/view/{id}', 'InvoiceController@view')->name('invoices.view');
 	Route::post('/invoices', 'InvoiceController@destroy');
+
+		//INVOICE_ITEMS
+		Route::post('/invoiceItems/store', 'InvoiceItemController@store')->name('invoiceItem.store');
 
 	//SUPPLIERS
 	Route::get('/suppliers', 'SupplierController@index')->name('suppliers.index');

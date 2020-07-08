@@ -15,9 +15,10 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
+            $table->string('number');
             $table->unsignedInteger('supplier_id')->index();
             $table->string('date');
-            $table->decimal('total', 8, 2);
+            $table->decimal('total', 8, 2)->nullable()->default(0.00);
             $table->timestamps();
         });
     }

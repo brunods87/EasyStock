@@ -5,7 +5,9 @@
 <div class="container">
 
     <h1 class="title">FOLHAS DE OBRA</h1>
-
+    <div class="toolbar text-right">
+        <a href="{{ route('jobs.create') }}"><i class="far fa-plus-square mr-3"></i>Adicionar</a>
+    </div>
     <table class="table table-bordered data-table">
 
         <thead>
@@ -13,11 +15,8 @@
             <tr>
 
                 <th>No</th>
-
-                <th>Name</th>
-
+                <th>Nome</th>
                 <th>Email</th>
-
                 <th width="100px">Action</th>
 
             </tr>
@@ -37,7 +36,7 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
 
 <script type="text/javascript">
   $(function () {
@@ -57,4 +56,4 @@
   });
 </script>
 
-@endsection
+@endpush

@@ -21,7 +21,7 @@ class CreateMaterialsTable extends Migration
             $table->unsignedInteger('unity_id')->index();
             $table->unsignedInteger('category_id')->index();
             $table->unsignedInteger('type_id')->index();
-            $table->decimal('price', 8, 2)->default(0.00);
+            $table->decimal('price', 8, 3)->default(0.000);
             $table->decimal('discount', 5, 2)->nullable();
             $table->boolean('taxable')->default(1);
             $table->unsignedInteger('tax');
