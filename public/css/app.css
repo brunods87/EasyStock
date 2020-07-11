@@ -17545,6 +17545,10 @@ label {
   width: 100% !important;
 }
 
+#invoiceItems td.quantity input {
+  width: 60px;
+}
+
 @media (min-width: 768px) {
   .navbar-expand-md .navbar-nav .nav-link {
     padding-right: 0.8rem;

@@ -87,6 +87,9 @@ label{
 .data-table-modal{
 	width: 100%!important;
 }
+#invoiceItems td.quantity input{
+	width: 60px;
+}
 
 @media (min-width: 768px){
 
