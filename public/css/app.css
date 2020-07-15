@@ -17511,7 +17511,7 @@ a:hover {
   background-color: #3490dc;
   color: #fff;
   border: 1px solid #3490dc;
-  padding: 0.3rem 1.5rem;
+  padding: 0.2rem 0.5rem;
   font-size: 16px;
   display: flex;
   align-items: center;
@@ -17541,7 +17541,10 @@ label {
   width: 70%;
 }
 
-.data-table-modal {
+.data-table-modal,
+.data-table-materials,
+.data-table-employees,
+.data-table-equipments {
   width: 100% !important;
 }
 

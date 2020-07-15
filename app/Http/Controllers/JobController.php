@@ -14,8 +14,11 @@ class JobController extends Controller
             $data = Job::latest()->get();
             return DataTables::of($data)
                     ->addIndexColumn()
+                    ->editColumn('client_id', function($row){
+                        return $row->client->name;
+                    })
                     ->addColumn('materials', function($row){
-                        return count($row->job_items);
+                        return count($row->job_expenses);
                     })
                     ->addColumn('action', function($row){
    
@@ -41,10 +44,13 @@ class JobController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'number' => 'required|numeric',
-            'supplier_id' => 'required',
+            'name' => 'required|string',
+            'reference' => 'required|string',
+            'client_id' => 'required',
             'date' => 'required|string',
-            'total' => 'nullable|numeric'
+            'address' => 'string',
+            'quote_value' => 'required|numeric',
+            'type' => 'string',
         ]);
         Job::create($data);
         return redirect('/jobs');
@@ -66,10 +72,13 @@ class JobController extends Controller
     public function update($id, Request $request)
     {
         $data = $request->validate([
-            'number' => 'required|numeric',
-            'supplier_id' => 'required',
+            'name' => 'required|string',
+            'reference' => 'required|string',
+            'client_id' => 'required',
             'date' => 'required|string',
-            'total' => 'nullable|numeric'
+            'address' => 'string',
+            'quote_value' => 'required|numeric',
+            'type' => 'string',
         ]);
 
         $job = Job::findOrFail($id);
@@ -83,5 +92,12 @@ class JobController extends Controller
         $job = Job::findOrFail($id);
         $job->delete();
         return ['msg' => 'A folha de obra foi eliminada'];
+    }
+
+
+
+    public function storeItems(Request $request)
+    {
+                
     }
 }

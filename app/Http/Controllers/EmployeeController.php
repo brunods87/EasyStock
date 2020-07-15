@@ -78,4 +78,22 @@ class EmployeeController extends Controller
         $employee->delete();
         return ['msg' => 'O employeee foi eliminado'];
     }
+
+    public function insert(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Employee::latest()->get();
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+   
+                           $btn = '<button type="button" data-id="'.$row->id.'" class="btn btn-primary" onClick="insertEmployee(this)"><i class="fas fa-plus-square"></i></button>';
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+      
+        return view('employees/index');
+    }
 }

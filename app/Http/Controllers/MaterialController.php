@@ -130,4 +130,11 @@ class MaterialController extends Controller
       
         return view('materials/index');
     }
+
+    public function getDiscount(Request $request)
+    {
+        $data = $request->post();
+        $material = Material::findOrFail($data['id']);
+        return $material->getDiscount();
+    }
 }

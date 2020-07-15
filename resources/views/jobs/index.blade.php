@@ -16,7 +16,10 @@
 
                 <th>No</th>
                 <th>Nome</th>
-                <th>Email</th>
+                <th>Referência</th>
+                <th>Cliente</th>
+                <th>Data</th>
+                <th>Despesas</th>
                 <th width="100px">Action</th>
 
             </tr>
@@ -48,7 +51,10 @@
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'name', name: 'name'},
-            {data: 'email', name: 'email'},
+            {data: 'reference', name: 'reference'},
+            {data: 'client_id', name: 'client_id'},
+            {data: 'date', name: 'date'},
+            {data: 'materials', name: 'materials'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });

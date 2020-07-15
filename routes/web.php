@@ -31,7 +31,9 @@ Route::group( ['middleware' => 'auth' ], function()
 	Route::post('/jobs/create', 'JobController@store');
 	Route::get('/jobs/update/{id}', 'JobController@edit')->name('jobs.update');
 	Route::post('jobs/update/{id}', 'JobController@update');
+	Route::get('/jobs/view/{id}', 'JobController@view')->name('jobs.view');
 	Route::post('/jobs', 'JobController@destroy');
+		Route::post('/jobItems/store', 'JobController@storeItems')->name('jobs.storeItems');
 
 	//MATERIALS
 	Route::get('/materials', 'MaterialController@index')->name('materials.index');
@@ -41,6 +43,7 @@ Route::group( ['middleware' => 'auth' ], function()
 	Route::post('/materials/update/{id}', 'MaterialController@update');
 	Route::post('/materials', 'MaterialController@destroy');
 	Route::get('/materials/insert', 'MaterialController@insert')->name('materials.insert');
+	Route::post('/materials/getDiscount', 'MaterialController@getDiscount')->name('materials.discount');
 
 		//CATEGORIES
 		Route::get('/categories', 'CategoryController@index')->name('categories.index');
@@ -71,6 +74,7 @@ Route::group( ['middleware' => 'auth' ], function()
 	Route::get('/employees/update/{id}', 'EmployeeController@edit')->name('employees.update');
 	Route::post('/employees/update/{id}', 'EmployeeController@update');
 	Route::post('/employees', 'EmployeeController@destroy');
+	Route::get('/employees/insert', 'EmployeeController@insert')->name('employees.insert');
 
 	//INVOICES
 	Route::get('/invoices', 'InvoiceController@index')->name('invoices.index');

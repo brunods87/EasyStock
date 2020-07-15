@@ -56,7 +56,7 @@ a:hover{
 	background-color: $mainColor;
 	color: #fff;
 	border: 1px solid $mainColor;
-	padding: .3rem 1.5rem;
+	padding: .2rem .5rem;
 	font-size: 16px;
 	display: flex;
 	align-items: center;
@@ -84,7 +84,7 @@ label{
 	}
 
 }
-.data-table-modal{
+.data-table-modal, .data-table-materials, .data-table-employees, .data-table-equipments{
 	width: 100%!important;
 }
 #invoiceItems td.quantity input{

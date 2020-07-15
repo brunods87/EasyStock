@@ -108,4 +108,13 @@ class Material extends Model
         return $this->belongsTo(Type::class);
     }
 
+    public function getDiscount()
+    {
+        $discount = 0;
+        if ($this->discount > 0){
+            $discount += $this->price * ($this->discount / 100);
+        }
+        return $discount;
+    }
+
 }
