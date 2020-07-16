@@ -51,4 +51,21 @@ class Invoice extends Model
     {
         return $this->hasMany(InvoiceItem::class);
     }
+
+    public function getTotal()
+    {
+        $total = 0;
+        foreach ($this->invoice_items as $item) {
+            $total += $item->total();
+        }
+        $this->total = $total;
+        $this->save();
+        return $total;
+    }
+
+    public function materialsIds()
+    {
+        $arrayIds = $this->invoice_items->pluck('material_id')->toArray();
+        return $arrayIds;
+    }
 }

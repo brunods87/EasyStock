@@ -66,7 +66,7 @@ class Material extends Model
                     ->label('IVA')
                     ->value($this->tax ?? 0);
                 $jobs = Job::all()->map(function($item, $key){
-                    return [$item->id => 'Ref: '.$item->reference.' Nome: '.$item->name];
+                    return [$item->id => 'Ref: '.$item->reference.' | Nome: '.$item->name];
                 });
                 $fieldset->control('select', 'job_id')
                     ->options($jobs)

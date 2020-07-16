@@ -2,50 +2,52 @@
 
 
 @section('content')
-
-<div class="container py-1">
-	<h1 class="text-center">Visualizar Folha de Obra</h1>
-	<div class="toolbar text-right">
+<div class="row mx-0">
+<aside class="col-2 sidebar">
+	<div class="sidebar-inner">
+	<h2 class="text-center">Folha de Obra</h2>
+	<div class="data">
+		<table class="table table-bordered view-table">
+			<tr>
+				<th>Nome</th>
+				<td>{{ $job->name }}</td>
+			</tr>
+			<tr>
+				<th>Referência</th>
+				<td>{{ $job->reference }}</td>
+			</tr>
+			<tr>
+				<th>Cliente</th>
+				<td>{{ $job->client->name }}</td>
+			</tr>
+			<tr>
+				<th>Data</th>
+				<td>{{ $job->date }}</td>
+			</tr>
+			<tr>
+				<th>Total Orçamentado</th>
+				<td>{{ $job->quote_value }}</td>
+			</tr>
+			<tr>
+				<th>Moradao</th>
+				<td>{{ $job->address }}</td>
+			</tr>
+			<tr>
+				<th>Tipo</th>
+				<td>{{ $job->type }}</td>
+			</tr>
+		</table>
+	</div>
+</div>
+</aside>
+<div class="col-10">
+<div class="container py-3">
+	<h1 class="mb-3 text-center">Elementos da Obra</h1>
+		<div class="toolbar text-right">
         <a href="{{ route('jobs.index') }}">Voltar</a>    
     </div>
-	<div class="row justify-content-center">
-		<div class="col-10">
-			<table class="table table-bordered view-table">
-				<tr>
-					<th>Nome</th>
-					<td>{{ $job->name }}</td>
-				</tr>
-				<tr>
-					<th>Referência</th>
-					<td>{{ $job->reference }}</td>
-				</tr>
-				<tr>
-					<th>Cliente</th>
-					<td>{{ $job->client->name }}</td>
-				</tr>
-				<tr>
-					<th>Data</th>
-					<td>{{ $job->date }}</td>
-				</tr>
-				<tr>
-					<th>Total Orçamentado</th>
-					<td>{{ $job->quote_value }}</td>
-				</tr>
-				<tr>
-					<th>Moradao</th>
-					<td>{{ $job->address }}</td>
-				</tr>
-				<tr>
-					<th>Tipo</th>
-					<td>{{ $job->type }}</td>
-				</tr>
-			</table>
-		</div>
-	</div>
-
 	<div class="row justify-content-center mt-5">
 		
-		<h2 class="mb-3">Elementos da Obra</h2>
 		<div class="form col-12">
 			<form method="POST" action="{{ route('jobs.storeItems') }}">
 				@csrf

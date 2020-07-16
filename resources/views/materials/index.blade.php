@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container py-3">
 
     <h1 class="title">MATERIAIS</h1>
     <div class="toolbar text-right">

@@ -14,7 +14,7 @@ class InvoiceItem extends Model
             $price -= $discount;
         }
 	    $quantity = $this->quantity;
-	    return number_format($price * $quantity,2,',', '.');
+	    return number_format($price * $quantity,2);
 	}
 
     public function invoice()

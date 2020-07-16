@@ -5,7 +5,23 @@
 		[
 			[
 				"invoice",
-				"invoice_id"
+				"invoice_items"
+			],
+			[
+				"text-c",
+				"text-center \tBootstrap 4 Class"
+			],
+			[
+				"number",
+				"number_format"
+			],
+			[
+				"posi",
+				"position-relative \tBootstrap 4.4"
+			],
+			[
+				"backgrou",
+				"background-color"
 			],
 			[
 				"invocie",
@@ -268,10 +284,6 @@
 				"div\tTag"
 			],
 			[
-				"backgrou",
-				"background-color\tproperty"
-			],
-			[
 				"che",
 				"checkForm"
 			],
@@ -336,42 +348,25 @@
 			"file": "resources/views/jobs/view.blade.php",
 			"settings":
 			{
-				"buffer_size": 6323,
+				"buffer_size": 6357,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "routes/web.php",
+			"file": "resources/views/invoices/view.blade.php",
 			"settings":
 			{
-				"buffer_size": 5401,
+				"buffer_size": 5980,
 				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/Http/Controllers/EmployeeController.php",
-			"settings":
-			{
-				"buffer_size": 3146,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/Http/Controllers/MaterialController.php",
-			"settings":
-			{
-				"buffer_size": 4835,
-				"line_ending": "Unix"
+				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "resources/sass/app.scss",
 			"settings":
 			{
-				"buffer_size": 1735,
+				"buffer_size": 1890,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -467,40 +462,54 @@
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/js",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/sass",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/categories",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/clients",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/employees",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/invoices",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/jobs",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/layouts",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/materials",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/modals",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/settings",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/suppliers",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/types",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/unities",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/routes"
 	],
 	"file_history":
 	[
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Material.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Http/Controllers/MaterialController.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/unities/index.blade.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/types/index.blade.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/suppliers/index.blade.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/jobs/index.blade.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/invoices/index.blade.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/employees/index.blade.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/categories/index.blade.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/clients/index.blade.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/materials/index.blade.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/invoices/view.blade.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/sass/app.scss",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Invoice.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/layouts/app.blade.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Http/Controllers/InvoiceController.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Http/Controllers/InvoiceItemController.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/InvoiceItem.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Http/Controllers/EmployeeController.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/routes/web.php",
+		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Http/Controllers/MaterialController.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Job.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Http/Controllers/JobController.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/jobs/index.blade.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/jobs/update.blade.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/invoices/view.blade.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/InvoiceItem.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/jobs/view.blade.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/js/app.js",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/database/migrations/2020_06_20_120642_create_jobs_table.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/modals/createMaterialModal.blade.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/materials/create.blade.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Http/Controllers/InvoiceItemController.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/sass/app.scss",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/database/migrations/2020_06_20_113502_create_materials_table.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/database/migrations/2020_06_20_121041_create_invoices_table.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Http/Controllers/InvoiceController.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/invoices/update.blade.php",
 		"/C/Users/Bruno/Downloads/web.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Invoice.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/invoices/index.blade.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/layouts/app.blade.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/node_modules/loader-utils/node_modules/json5/lib/stringify.js",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Http/Controllers/SupplierController.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/invoices/create.blade.php",
@@ -508,26 +517,19 @@
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/settings/index.blade.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Setting.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Http/Controllers/ClientController.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Http/Controllers/EmployeeController.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/materials/update.blade.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Http/Controllers/SettingController.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/materials/index.blade.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/database/migrations/2020_06_20_121812_create_employees_table.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/employees/update.blade.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/employees/index.blade.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/employees/create.blade.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/unities/index.blade.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Http/Controllers/UnityController.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Unity.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/database/migrations/2020_06_20_120553_create_unities_table.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Employee.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Http/Controllers/TypeController.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/types/index.blade.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/categories/index.blade.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/unities/update.blade.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/unities/create.blade.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Type.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/clients/index.blade.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/clients/create.blade.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Supplier.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/app/Client.php",
@@ -541,7 +543,6 @@
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/database/migrations/2020_06_20_120619_create_suppliers_table.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/suppliers/create.blade.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/suppliers/update.blade.php",
-		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/resources/views/suppliers/index.blade.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/vendor/orchestra/html/config/form.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/vendor/orchestra/html/resources/views/form/vertical.php",
 		"/C/Users/Bruno/Documents/Programacao/Applications/EasyStock/vendor/orchestra/html/resources/views/form/horizontal.php",
@@ -622,6 +623,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"arrayMaterials",
 			"materials",
 			"employees",
 			"materials",
@@ -731,7 +733,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -759,10 +761,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 702.4,
+						"translation.y": 702.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -771,15 +773,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6323,
+						"buffer_size": 6357,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4498,
-								4498
+								170,
+								170
 							]
 						],
 						"settings":
@@ -788,116 +790,56 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2224.8,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "routes/web.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5401,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3704,
-								3704
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 918.4,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "app/Http/Controllers/EmployeeController.php",
+					"buffer": 2,
+					"file": "resources/views/invoices/view.blade.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3146,
+						"buffer_size": 5980,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3137,
-								3137
+								164,
+								164
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1296.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "app/Http/Controllers/MaterialController.php",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 4835,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3708,
-								3708
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1782.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
+					"buffer": 3,
 					"file": "resources/sass/app.scss",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1735,
+						"buffer_size": 1890,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1489,
-								1489
+								1718,
+								1718
 							]
 						],
 						"settings":
@@ -906,10 +848,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1255.2,
+						"translation.y": 1350.4,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]

@@ -56,6 +56,7 @@ class InvoiceController extends Controller
     public function view($id)
     {
         $invoice = Invoice::findOrFail($id);
+        $invoice->getTotal();
         return view('invoices.view', compact('invoice'));        
     }
 

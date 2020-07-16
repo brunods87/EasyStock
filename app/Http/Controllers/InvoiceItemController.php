@@ -15,6 +15,7 @@ class InvoiceItemController extends Controller
         ]);  
 		$data = $request->post();
 		$invoice_id = intval($data['invoiceID']);
+		$invoice = Invoice::findOrFail($invoice_id);
 		InvoiceItem::where('invoice_id', $invoice_id)->delete();
 		foreach ($data['quantity'] as $key => $value) {
 			if ($value > 0){
@@ -25,6 +26,7 @@ class InvoiceItemController extends Controller
 				$item->save();
 			}
 		}
+
 		return redirect('invoices/view/'.$invoice_id);
     }
 

@@ -17462,6 +17462,11 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+main,
+.sidebar {
+  min-height: calc(100vh - 106px);
+}
+
 .title {
   text-align: center;
 }
@@ -17550,6 +17555,15 @@ label {
 
 #invoiceItems td.quantity input {
   width: 60px;
+}
+
+.sidebar {
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+  border-bottom: none;
 }
 
 @media (min-width: 768px) {
