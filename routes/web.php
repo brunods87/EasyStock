@@ -34,6 +34,7 @@ Route::group( ['middleware' => 'auth' ], function()
 	Route::get('/jobs/view/{id}', 'JobController@view')->name('jobs.view');
 	Route::post('/jobs', 'JobController@destroy');
 		Route::post('/jobItems/store', 'JobController@storeItems')->name('jobs.storeItems');
+		Route::post('/jobs/getJobs', 'JobController@getJobs')->name('jobs.getJobs');
 
 	//MATERIALS
 	Route::get('/materials', 'MaterialController@index')->name('materials.index');

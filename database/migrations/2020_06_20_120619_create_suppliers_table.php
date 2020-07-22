@@ -18,6 +18,7 @@ class CreateSuppliersTable extends Migration
             $table->string('name');
             $table->decimal('discount', 5, 2)->nullable();
             $table->bigInteger('nif');
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

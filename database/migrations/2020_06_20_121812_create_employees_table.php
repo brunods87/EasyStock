@@ -20,7 +20,9 @@ class CreateEmployeesTable extends Migration
             $table->string('admission_date');
             $table->decimal('salary', 8, 2);
             $table->decimal('value_hour', 5, 2);
+            $table->decimal('value_extra_hour', 5, 2);
             $table->text('observations')->nullable();
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

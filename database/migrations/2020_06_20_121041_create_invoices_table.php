@@ -19,6 +19,7 @@ class CreateInvoicesTable extends Migration
             $table->unsignedInteger('supplier_id')->index();
             $table->string('date');
             $table->decimal('total', 8, 2)->nullable()->default(0.00);
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

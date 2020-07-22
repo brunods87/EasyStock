@@ -3,7 +3,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container py-3">
 	{!! $form !!}
 </div>
 

@@ -42,6 +42,9 @@ class Job extends Model
                 $fieldset->control('textarea', 'address')
                     ->label('Morada')
                     ->value($this->address ?? '');
+                $fieldset->control('textarea', 'observations')
+                    ->label('Observações')
+                    ->value($this->observations ?? '');
                 $attributes = [
                     'step' => 0.01,
                 ];
@@ -71,6 +74,25 @@ class Job extends Model
     public function client()
     {
         return $this->belongsTo(Client::class);
+    }
+
+    public function dropdownCustom()
+    {
+        $jobs = Job::all()->map(function($item, $key){
+            return [$item->id => 'Ref: '.$item->reference.' | Nome: '.$item->name];
+        });
+    }
+
+    public static function dropdownSelect($id = null)
+    {
+        $jobs = Job::where('active', true)->get();
+        $options = "<option value=''></option>";
+        foreach ($jobs as $job) {
+            $selected = "";
+            if (!is_null($id) && $id == $job->id) $selected = "selected";
+            $options .= "<option value='".$job->id."' ".$selected.">REF: ".$job->reference." | NOME: ".$job->name."</option>";
+        }
+        return $options;
     }
 
 }

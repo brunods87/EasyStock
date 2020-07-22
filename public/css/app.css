@@ -17553,7 +17553,7 @@ label {
   width: 100% !important;
 }
 
-#invoiceItems td.quantity input {
+#invoiceItems td input {
   width: 60px;
 }
 

@@ -16,6 +16,10 @@ class CreateJobProfitsTable extends Migration
         Schema::create('job_profits', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('job_id')->index();
+            $table->string('number');
+            $table->date('date');
+            $table->decimal('value', 8,2);
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

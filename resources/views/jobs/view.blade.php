@@ -65,7 +65,6 @@
 							<th>Preço Unitário</th>
 							<th>Desconto</th>
 							<th>Total</th>
-							<th>IVA</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -80,7 +79,6 @@
 							<td class="price">{{$item->material->price}}</td>
 							<td class="discount">{{$item->material->discount}}</td>
 							<td class="total">{{$item->total()}} €</td>
-							<td class="tax">{{$item->material->tax}}</td>
 							<td><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td>
 						</tr>
 						@endforeach

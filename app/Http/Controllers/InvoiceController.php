@@ -49,8 +49,8 @@ class InvoiceController extends Controller
             'date' => 'required|string',
             'total' => 'nullable|numeric'
         ]);
-        Invoice::create($data);
-        return redirect('/invoices');
+        $invoice = Invoice::create($data);
+        return redirect('/invoices/view/'.$invoice->id);
     }
 
     public function view($id)
@@ -78,7 +78,7 @@ class InvoiceController extends Controller
 
         $invoice = Invoice::findOrFail($id);
         $invoice->update($data);
-        return redirect('/invoices');
+        return redirect('/invoices/view/'.$invoice->id);
     }
 
     public function destroy(Request $request)

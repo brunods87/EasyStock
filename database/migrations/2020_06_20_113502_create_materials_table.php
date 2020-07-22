@@ -25,8 +25,8 @@ class CreateMaterialsTable extends Migration
             $table->decimal('discount', 5, 2)->nullable();
             $table->boolean('taxable')->default(1);
             $table->unsignedInteger('tax');
-            $table->decimal('stock', 8, 3)->default(1);
-            $table->unsignedInteger('job_id')->index()->nullable();
+            $table->decimal('stock', 8, 3)->default(0);
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

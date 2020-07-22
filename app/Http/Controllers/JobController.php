@@ -49,6 +49,7 @@ class JobController extends Controller
             'client_id' => 'required',
             'date' => 'required|string',
             'address' => 'string',
+            'observations' => 'string',
             'quote_value' => 'required|numeric',
             'type' => 'string',
         ]);
@@ -77,6 +78,7 @@ class JobController extends Controller
             'client_id' => 'required',
             'date' => 'required|string',
             'address' => 'string',
+            'observations' => 'string',
             'quote_value' => 'required|numeric',
             'type' => 'string',
         ]);
@@ -94,7 +96,11 @@ class JobController extends Controller
         return ['msg' => 'A folha de obra foi eliminada'];
     }
 
-
+    public function getJobs(Request $request)
+    {
+        $jobs = Job::where('active', true)->get();
+        return $jobs;        
+    }
 
     public function storeItems(Request $request)
     {

@@ -18,6 +18,7 @@ class CreateClientsTable extends Migration
             $table->string('name');
             $table->bigInteger('nif');
             $table->text('address');
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

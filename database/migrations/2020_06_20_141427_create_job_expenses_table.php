@@ -19,6 +19,8 @@ class CreateJobExpensesTable extends Migration
             $table->unsignedInteger('expense_id')->index();
             $table->string('expense_type');
             $table->decimal('quantity', 8, 3);
+            $table->decimal('quantity_extra', 8, 3);
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

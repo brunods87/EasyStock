@@ -62,16 +62,9 @@ class Material extends Model
                     ->value($this->stock ?? 0)
                     ->attributes($attributes);
                 $fieldset->control('select', 'tax')
-                    ->options(['0' => '0%', Setting::first()->tax_value => Setting::first()->tax_value.'%'])
+                    ->options(['0' => '0%', Setting::first()->tax_value_normal => Setting::first()->tax_value_normal.'%', Setting::first()->tax_value_intermediary => Setting::first()->tax_value_intermediary.'%', Setting::first()->tax_value_reduced => Setting::first()->tax_value_reduced.'%'])
                     ->label('IVA')
                     ->value($this->tax ?? 0);
-                $jobs = Job::all()->map(function($item, $key){
-                    return [$item->id => 'Ref: '.$item->reference.' | Nome: '.$item->name];
-                });
-                $fieldset->control('select', 'job_id')
-                    ->options($jobs)
-                    ->label('Folha de Obra')
-                    ->value($this->job_id ?? '');
             });
 
         });

@@ -9,9 +9,13 @@ class InvoiceItem extends Model
 	public function total()
 	{
 	    $price = $this->material->price;
-        $discount = $this->material->getDiscount();
-        if ($discount > 0){
-            $price -= $discount;
+        $discount_1 = $this->discount_1;
+        if ($discount_1 > 0){
+            $price -= $price * ($discount_1/100);
+        }
+        $discount_2 = $this->discount_2;
+        if ($discount_2 > 0){
+            $price -= $price * ($discount_2/100);
         }
 	    $quantity = $this->quantity;
 	    return number_format($price * $quantity,2);

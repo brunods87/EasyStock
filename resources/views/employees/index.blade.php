@@ -20,6 +20,7 @@
                 <th>Data de admissão</th>
                 <th>Salário</th>
                 <th>Valor Hora</th>
+                <th>Valor Hora Extra</th>
                 <th>Observações</th>
                 <th width="100px">Ações</th>
 
@@ -56,6 +57,7 @@
             {data: 'admission_date', name: 'admission_date'},
             {data: 'salary', name: 'salary'},
             {data: 'value_hour', name: 'value_hour'},
+            {data: 'value_extra_hour', name: 'value_extra_hour'},
             {data: 'observations', name: 'observations'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]

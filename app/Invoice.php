@@ -68,4 +68,15 @@ class Invoice extends Model
         $arrayIds = $this->invoice_items->pluck('material_id')->toArray();
         return $arrayIds;
     }
+
+    public function subtotal()
+    {
+        $total = 0;
+        foreach ($this->invoice_items as $item) {
+            $total += $item->total();
+        }
+        $this->total = $total;
+        $this->save();
+        return $total;
+    }
 }

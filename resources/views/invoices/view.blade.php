@@ -1,3 +1,9 @@
+<?php
+
+use App\Job;
+
+?>
+
 @extends('layouts.app')
 
 
@@ -20,6 +26,10 @@
 				<tr>
 					<th>Data</th>
 					<td>{{ $invoice->date }}</td>
+				</tr>
+				<tr>
+					<th>Total Ilíquido</th>
+					<td>{{ number_format($invoice->subtotal(),2,',','.') }} €</td>
 				</tr>
 				<tr>
 					<th>Total</th>
@@ -54,23 +64,25 @@
 								<th style="width: 70px;">Qtd</th>
 								<th>Preço Unitário</th>
 								<th>Desconto</th>
-								<th>Total</th>
 								<th>IVA</th>
+								<th>Total</th>
+								<th>Obra</th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach($invoice->invoice_items as $item)
 							<tr>
-								<td class="reference">{{$item->material->reference}}</td>
+								<td class="reference">{{$item->material->reference}}<input type="hidden" name="material_id[]" value="{{$item->material->id}}"></td>
 								<td class="name">{{$item->material->name}}</td>
 								<td class="unity">{{$item->material->unity->name}}</td>
 								<td class="quantity">
-									<input type="number" data-id="{{$item->material->id}}" onclick="select();" name="quantity[{{$item->material->id}}]" value="{{floatval($item->quantity)}}" step="0.01" min="0">
+									<input type="number" data-id="{{$item->material->id}}" onclick="select();" name="quantity[]" value="{{floatval($item->quantity)}}" step="0.01" min="0">
 								</td>
 								<td class="price">{{$item->material->price}}</td>
-								<td class="discount">{{$item->material->discount}}</td>
-								<td class="total">{{$item->total()}} €</td>
+								<td class="discount"><input type="number" class="material-discount" min=0 onclick="select();" name="discount_1[]" value="{{floatval($item->discount_1)}}"> + <input type="number" name="discount_2[]" class="extra-discount" min=0 onclick="select();" value="{{floatval($item->discount_2)}}"></td>
 								<td class="tax">{{$item->material->tax}}</td>
+								<td class="total">{{$item->total()}} €</td>
+								<td class="job"><select class="job-select" name="job[]">{!! Job::dropdownSelect($item->job_id) !!}</select></td>
 								<td><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td>
 							</tr>
 							@endforeach
@@ -123,7 +135,8 @@
 		  });
 	</script>
 	<script type="text/javascript">
-		var arrayMaterials = @json($invoice->materialsIds());
+		var jobsArray = [];
+		var jobsDropdown = '<option value=""></option>';
 		function insertMaterial(el)
 		{
 			var row = el.closest('tr');
@@ -136,33 +149,44 @@
 				discount: row.querySelector('.discount').textContent,
 				tax: row.querySelector('.tax').textContent
 			}
-			if (!arrayMaterials.includes(material.id)){
-				var html = '<tr><td class="reference">'+material.reference+'</td><td class="name">'+material.name+'</td><td class="unity">'+material.unity+'</td><td class="quantity">							<input type="number" onclick="select();" data-id="'+material.id+'" name="quantity['+material.id+']" value="0" step="0.01" min="0"></td><td class="price">'+material.price+'</td><td class="discount">'+material.discount+'</td><td class="total">0,00 €</td><td class="tax">'+material.tax+'</td><td><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td></tr>';
-				$('#invoiceItems tbody').append(html);
-				arrayMaterials.push(material.id);
-			}
+
+			var html = '<tr><td class="reference">'+material.reference+'<input type="hidden" name="material_id[]" value="'+material.id+'"></td><td class="name">'+material.name+'</td><td class="unity">'+material.unity+'</td><td class="quantity"><input type="number" class="quantity-input" onclick="select();" data-id="'+material.id+'" name="quantity[]" value="0" step="0.01" min="0"></td><td class="price">'+material.price+'</td><td class="discount"><input type="number" name="discount_1[]" class="material-discount" value='+material.discount+' onclick="select();" data-id="'+material.id+'" min="0"> + <input type="number" value=0 onclick="select();" name="discount_2[]" class="extra-discount" data-id="'+material.id+'" min="0"></td><td class="tax">'+material.tax+'</td><td class="total">0,00 €</td><td><select class="job-select" name="job[]">'+jobsDropdown+'</select></td><td><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td></tr>';
+			$('#invoiceItems tbody').append(html);
+			
 		}
 
 		$(document).ready(function(){
 
-			$(document).on('change', '#invoiceItems td.quantity input', function(event){
+			
+			$.ajax({
+				type: 'POST',
+				url: '{{ route('jobs.getJobs') }}',
+			}).done(function(response){
+				jobsArray = response;
+				jobsArray.forEach(function(el){
+					jobsDropdown += '<option value="'+el.id+'">REF: '+el.reference+' | NOME: '+el.name+'</option>';
+				});
+			});
+
+			$(document).on('change', '#invoiceItems td input', function(event){
 
 				var id = event.target.dataset.id;
 				var row = event.target.closest('tr');
 				var price = Number(row.querySelector('.price').textContent);
-				var quantity = Number(event.target.value);
-				$.ajax({
-					type: 'POST',
-					url: '{{ route('materials.discount') }}',
-					data: {id: id}
-				}).done(function(response){
-					var discount = response;
-					if (discount > 0){
-						price -= discount; 
-					}
-					var total = price * quantity;
-					row.querySelector('.total').innerHTML = total.toFixed(2) + " €";
-				});
+				var quantity = Number(row.querySelector('.quantity-input').value);
+				var discount_1 = Number(row.querySelector('.material-discount').value);
+				var discount_2 = Number(row.querySelector('.extra-discount').value);
+				
+				if (discount_1 > 0){
+					var sub = price * (discount_1/100);
+					price -= sub; 
+				}
+				if (discount_2 > 0){
+					var sub2 = price * (discount_2/100);
+					price -= sub2; 
+				}
+				var total = price * quantity;
+				row.querySelector('.total').innerHTML = total.toFixed(2) + " €";
 				
 			});
 			$(document).on('click', '#invoiceItems td .delete-row', function(event){

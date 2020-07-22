@@ -59,7 +59,6 @@ class MaterialController extends Controller
             'discount' => 'required|numeric',
             'tax' => 'required',
             'stock' => 'required|numeric',
-            'job_id' => 'nullable'
         ]);
         Material::create($data);
         return redirect('/materials');
@@ -85,7 +84,6 @@ class MaterialController extends Controller
             'discount' => 'required|numeric',
             'tax' => 'required',
             'stock' => 'required|numeric',
-            'job_id' => 'nullable'
         ]);
 
         $material = Material::findOrFail($id);

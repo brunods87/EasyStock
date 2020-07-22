@@ -49,6 +49,11 @@ class Employee extends Model
                 	->value($this->value_hour ?? '')
                 	->attributes($attributes);
 
+                $fieldset->control('input:number', 'value_extra_hour')
+                    ->label('Valor hora extra')
+                    ->value($this->value_extra_hour ?? '')
+                    ->attributes($attributes);
+
 	            $fieldset->control('textarea', 'observations')
 	                ->label('Observações')
 	                ->value($this->observations ?? '');

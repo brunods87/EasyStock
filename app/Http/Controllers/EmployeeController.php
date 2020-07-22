@@ -43,6 +43,7 @@ class EmployeeController extends Controller
             'name' => 'required|string',
             'salary' => 'numeric',
             'value_hour' => 'numeric',
+            'value_extra_hour' => 'numeric',
             'observations' => 'nullable|string'
         ]);
         Employee::create($data);
@@ -64,6 +65,7 @@ class EmployeeController extends Controller
             'name' => 'required|string',
             'salary' => 'numeric',
             'value_hour' => 'numeric',
+            'value_extra_hour' => 'numeric',
             'observations' => 'nullable|string'
         ]);
         $employee = Employee::findOrFail($id);

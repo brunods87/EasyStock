@@ -20,8 +20,10 @@ class CreateJobsTable extends Migration
             $table->string('name');
             $table->unsignedInteger('client_id')->index();
             $table->text('address');
+            $table->text('observations');
             $table->decimal('quote_value', 8, 2);
             $table->string('type')->default('faturado');
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

@@ -24,9 +24,21 @@ class Setting extends Model
 	        $form->submit = $this->exists ? 'Guardar' : 'Criar';
 
 	        $form->fieldset(function ($fieldset) {
-	            $fieldset->control('input:number', 'tax_value')
-	                ->label('Valor IVA')
-	                ->value($this->tax_value ?? '');
+	            $fieldset->control('input:number', 'tax_value_normal')
+	                ->label('IVA Taxa normal')
+	                ->value($this->tax_value_normal ?? '');
+	        });
+
+	        $form->fieldset(function ($fieldset) {
+	            $fieldset->control('input:number', 'tax_value_reduced')
+	                ->label('IVA Taxa reduzida')
+	                ->value($this->tax_value_reduced ?? '');
+	        });
+
+	        $form->fieldset(function ($fieldset) {
+	            $fieldset->control('input:number', 'tax_value_intermediary')
+	                ->label('IVA Taxa intermédia')
+	                ->value($this->tax_value_intermediary ?? '');
 	        });
 
 	    });
