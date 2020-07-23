@@ -29,7 +29,7 @@
 				<td>{{ $job->quote_value }}</td>
 			</tr>
 			<tr>
-				<th>Moradao</th>
+				<th>Morada</th>
 				<td>{{ $job->address }}</td>
 			</tr>
 			<tr>
@@ -54,7 +54,7 @@
 				<input type="hidden" name="jobID" value="{{$job->id}}">
 			<div class="col-12">
 				
-				<table class="table table-bordered" id="jobItems">
+				<table class="table table-bordered" id="jobItemsMaterials">
 					
 					<thead>
 						<tr>
@@ -68,7 +68,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						@foreach($job->job_expenses as $item)
+						@foreach($job->materials() as $item)
 						<tr>
 							<td class="reference">{{$item->material->reference}}</td>
 							<td class="name">{{$item->material->name}}</td>
@@ -76,8 +76,41 @@
 							<td class="quantity">
 								<input type="number" onclick="select();" name="quantity[{{$item->material->id}}]" value="{{floatval($item->quantity)}}" step="0.01" min="0">
 							</td>
-							<td class="price">{{$item->material->price}}</td>
-							<td class="discount">{{$item->material->discount}}</td>
+							<td class="total">{{$item->total()}} €</td>
+							<td><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td>
+						</tr>
+						@endforeach
+					</tbody>
+
+				</table>
+				<table class="table table-bordered" id="jobItemsEmployees">
+					
+					<thead>
+						<tr>
+							<th>Número</th>
+							<th>Nome</th>
+							<th>Salário</th>
+							<th>Valor Hora</th>
+							<th>Quantidade</th>
+							<th>Valor Hora Extra</th>
+							<th>Quantidade Extra</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach($job->employees() as $item)
+						<tr>
+							<td class="number">{{$item->expense_jobable->number}}</td>
+							<td class="name">{{$item->expense_jobable->name}}</td>
+							<td class="salary">{{$item->expense_jobable->salary}}</td>
+							<td class="value_hour">{{$item->expense_jobable->value_hour}}</td>
+							<td class="quantity">
+								<input type="number" onclick="select();" name="quantity[{{$item->expense_id}}]" value="{{floatval($item->quantity)}}" step="0.01" min="0">
+							</td>
+							<td class="value_extra_hour">{{$item->expense_jobable->value_extra_hour}}</td>
+							<td class="quantity-extra">
+								<input type="number" onclick="select();" name="quantityExtra[{{$item->expense_id}}]" value="{{floatval($item->quantity_extra)}}" step="0.01" min="0">
+							</td>
 							<td class="total">{{$item->total()}} €</td>
 							<td><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td>
 						</tr>
@@ -86,8 +119,8 @@
 
 				</table>
 				<div class="text-center">
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addExpensesModal"><i class="far fa-plus-square mr-2"></i>Despesa</button>
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#"><i class="far fa-plus-square mr-2"></i>Receita</button>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addExpensesModal"><i class="far fa-plus-square mr-2"></i>Gasto</button>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#"><i class="far fa-plus-square mr-2"></i>Ganho</button>
 					<input type="submit" class="btn btn-primary" name="" value="Guardar">
 				</div>
 				@include('modals.addExpensesModal')

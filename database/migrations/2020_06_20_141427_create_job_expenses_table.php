@@ -16,10 +16,10 @@ class CreateJobExpensesTable extends Migration
         Schema::create('job_expenses', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('job_id')->index();
-            $table->unsignedInteger('expense_id')->index();
-            $table->string('expense_type');
+            $table->unsignedInteger('expense_id')->nullable();
+            $table->string('expense_type')->nullable();
             $table->decimal('quantity', 8, 3);
-            $table->decimal('quantity_extra', 8, 3);
+            $table->decimal('quantity_extra', 8, 3)->nullable();
             $table->boolean('active')->default(1);
             $table->timestamps();
         });

@@ -27,6 +27,9 @@ class InvoiceItemController extends Controller
 				$item->discount_2 = $data['discount_2'][$i];
 				$item->job_id = $data['job'][$i];
 				$item->save();
+				if ($item->job_id){
+					$item->linkJob();	
+				}
 			}
 		}
 

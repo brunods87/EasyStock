@@ -17539,11 +17539,16 @@ label {
 
 .view-table th {
   text-align: right;
-  width: 30%;
+  width: 60%;
 }
 
 .view-table td {
-  width: 70%;
+  width: 40%;
+}
+
+.view-table th,
+.view-table td {
+  padding: 0.75rem 0.5rem;
 }
 
 .data-table-modal,

@@ -54,13 +54,9 @@ class Invoice extends Model
 
     public function getTotal()
     {
-        $total = 0;
-        foreach ($this->invoice_items as $item) {
-            $total += $item->total();
-        }
-        $this->total = $total;
+        $this->total = $this->subtotal(true, true);
         $this->save();
-        return $total;
+        return $this->total;
     }
 
     public function materialsIds()
@@ -69,14 +65,38 @@ class Invoice extends Model
         return $arrayIds;
     }
 
-    public function subtotal()
+    public function totalTax()
     {
         $total = 0;
         foreach ($this->invoice_items as $item) {
-            $total += $item->total();
+            $price = $item->priceWithDiscount();
+            $total += $price * ($item->material->tax/100) * $item->quantity;
         }
-        $this->total = $total;
-        $this->save();
+        return $total;
+    }
+
+    public function totalDiscount()
+    {
+        $total = 0;
+        foreach ($this->invoice_items as $item) {
+            $total += $item->getDiscount() * $item->quantity;
+        }
+        return $total;
+    }
+
+    public function subtotal($discount = false, $tax = false)
+    {
+        $total = 0;
+        foreach ($this->invoice_items as $item) {
+            $price = $item->material->price * $item->quantity;
+            if ($discount)
+                $price = $item->total();
+            if ($tax){
+                $price = $item->total(true);
+            }
+            $total += $price;
+        }
+
         return $total;
     }
 }

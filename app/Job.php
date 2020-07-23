@@ -71,6 +71,16 @@ class Job extends Model
         return $this->hasMany(JobProfit::class);
     }
 
+    public function materials()
+    {
+        return $this->job_expenses()->where('expense_type', 'App/InvoiceItem')->get();
+    }
+
+    public function employees()
+    {
+        return $this->job_expenses()->where('expense_type', 'App/Employee')->get();
+    }
+
     public function client()
     {
         return $this->belongsTo(Client::class);

@@ -32,8 +32,20 @@ use App\Job;
 					<td>{{ number_format($invoice->subtotal(),2,',','.') }} €</td>
 				</tr>
 				<tr>
-					<th>Total</th>
-					<td>{{ number_format($invoice->total,2,',','.') }} €</td>
+					<th>Total Descontos</th>
+					<td>{{ number_format($invoice->totalDiscount(),2,',','.') }} €</td>
+				</tr>
+				<tr>
+					<th>Total Líquido</th>
+					<td>{{ number_format($invoice->subtotal(true),2,',','.') }} €</td>
+				</tr>
+				<tr>
+					<th>Total IVA</th>
+					<td>{{ number_format($invoice->totalTax(),2,',','.') }} €</td>
+				</tr>
+				<tr>
+					<th>Total a pagar</th>
+					<td>{{ number_format($invoice->getTotal(),2,',','.') }} €</td>
 				</tr>
 			</table>
 			

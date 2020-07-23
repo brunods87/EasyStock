@@ -78,7 +78,7 @@ class Material extends Model
 
     public function job_expense()
     {
-        return $this->belongsTo(JobExpense::class);
+        return $this->morphOne(JobExpense::class, 'expense_jobable', 'expense_type', 'expense_id');
     }
 
     public function job()
