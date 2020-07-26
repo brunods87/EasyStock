@@ -61,7 +61,7 @@ class Employee extends Model
         });
 	}
 
-	public function job_expenses()
+	public function job_expense()
     {
         return $this->morphMany(JobExpense::class, 'expense_jobable', 'expense_type', 'expense_id');
     }

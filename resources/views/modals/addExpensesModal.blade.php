@@ -53,6 +53,7 @@
                           <th>Data de admissão</th>
                           <th>Salário</th>
                           <th>Valor Hora</th>
+                          <th>Valor Hora Extra</th>
                           <th width="100px">Ações</th>
                       </tr>
                   </thead>

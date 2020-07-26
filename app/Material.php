@@ -110,4 +110,22 @@ class Material extends Model
         return $discount;
     }
 
+    public function priceInvoiceJob($jobId)
+    {
+        $invoiceItem = InvoiceItem::where('material_id', $this->id)->where('job_id', $jobId)->first();
+        if (is_null($invoiceItem)){
+            return false;
+        }
+        return $invoiceItem->total();
+    }
+
+    public function discountInvoiceJob($jobId)
+    {
+        $invoiceItem = InvoiceItem::where('material_id', $this->id)->where('job_id', $jobId)->first();
+        if (is_null($invoiceItem)){
+            return 0;
+        }
+        return $invoiceItem->getDiscount() * $invoiceItem->quantity;
+    }
+
 }

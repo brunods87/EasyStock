@@ -6,22 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class JobExpense extends Model
 {
-	public function linkMaterial($model)
+	public function linkMaterial($item)
 	{
-		$this->job_id = $model->job_id;
-		$this->quantity = $model->quantity;
+		$this->job_id = $item->job_id;
+		$this->quantity = $item->quantity;
+		$this->total = $item->total();
 		$this->save();
-		$model->material->job_expense()->save($this);
+		$item->material->job_expense()->save($this);
 	}
 
-	public function linkEmployee($model)
+	public function linkEmployee($employee, $job_id, $quantity, $quantity_extra, $total)
 	{
-		$this->job_id = $model->job_id;
-		$this->expense_type = lcfirst(class_basename($model));
-		$this->quantity = $model->quantity;
-		$this->quantity_extra = $model->quantity_extra;
+		$this->job_id = $job_id;
+		$this->quantity = $quantity;
+		$this->quantity_extra = $quantity_extra;
+		$this->total = $total;
 		$this->save();
-		$model->job_expense()->save($this);
+		$employee->job_expense()->save($this);
 	}
 
     public function job()
@@ -31,6 +32,6 @@ class JobExpense extends Model
 
     public function expense_jobable()
     {
-        return $this->morphTo(null, 'expense_type', 'expense_id')->orderBy('order');
+        return $this->morphTo(null, 'expense_type', 'expense_id');
     }
 }

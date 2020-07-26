@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
 use App\Job;
-use Illuminate\Http\Request;
+use App\JobExpense;
 use DataTables;
+use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
@@ -104,6 +106,31 @@ class JobController extends Controller
 
     public function storeItems(Request $request)
     {
-                
+        $request->validate([
+            'jobID' => 'required',
+        ]);
+        $data = $request->post();
+        $job_id = $data['jobID'];
+        $materials = $data['Material'];
+        $employees = $data['Employee'];
+        //employees
+        for($row = 0;$row < sizeof($employees['employee_id']);$row++) {
+            $employee = Employee::findOrFail($employees['employee_id'][$row]);
+            $expense_id = $employees['expense_id'][$row];
+            $quantity = $employees['quantity'][$row];
+            $quantity_extra = $employees['quantity_extra'][$row];
+            $total = ($employee->value_hour * $quantity) + ($employee->value_extra_hour * $quantity_extra);
+            if ($expense_id > 0){
+                $expense = JobExpense::findOrFail($expense_id);
+                $expense->quantity = $quantity;
+                $expense->quantity_extra = $quantity_extra;
+                $expense->total = $total;
+                $expense->save();
+            }else{
+                $expense = new JobExpense();
+                $expense->linkEmployee($employee, $job_id, $quantity, $quantity_extra, $total);
+            }
+        }
+        return redirect('jobs/view/'.$job_id);
     }
 }

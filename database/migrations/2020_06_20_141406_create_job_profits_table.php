@@ -18,7 +18,7 @@ class CreateJobProfitsTable extends Migration
             $table->unsignedInteger('job_id')->index();
             $table->string('number');
             $table->date('date');
-            $table->decimal('value', 8,2);
+            $table->decimal('total', 8,2);
             $table->boolean('active')->default(1);
             $table->timestamps();
         });

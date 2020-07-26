@@ -73,12 +73,12 @@ class Job extends Model
 
     public function materials()
     {
-        return $this->job_expenses()->where('expense_type', 'App/InvoiceItem')->get();
+        return $this->job_expenses()->where('expense_type', 'App\Material')->get();
     }
 
     public function employees()
     {
-        return $this->job_expenses()->where('expense_type', 'App/Employee')->get();
+        return $this->job_expenses()->where('expense_type', 'App\Employee')->get();
     }
 
     public function client()
@@ -103,6 +103,12 @@ class Job extends Model
             $options .= "<option value='".$job->id."' ".$selected.">REF: ".$job->reference." | NOME: ".$job->name."</option>";
         }
         return $options;
+    }
+
+    public function employeesIds()
+    {
+        $arrayIds = $this->employees()->pluck('expense_id')->toArray();
+        return $arrayIds;
     }
 
 }

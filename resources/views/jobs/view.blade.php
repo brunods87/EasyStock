@@ -26,7 +26,7 @@
 			</tr>
 			<tr>
 				<th>Total Orçamentado</th>
-				<td>{{ $job->quote_value }}</td>
+				<td>{{ $job->quote_value }} €</td>
 			</tr>
 			<tr>
 				<th>Morada</th>
@@ -46,14 +46,14 @@
 		<div class="toolbar text-right">
         <a href="{{ route('jobs.index') }}">Voltar</a>    
     </div>
-	<div class="row justify-content-center mt-5">
+	<div class="row justify-content-center mt-3">
 		
 		<div class="form col-12">
 			<form method="POST" action="{{ route('jobs.storeItems') }}">
 				@csrf
 				<input type="hidden" name="jobID" value="{{$job->id}}">
 			<div class="col-12">
-				
+				<h2 class="text-center">Materiais</h2>
 				<table class="table table-bordered" id="jobItemsMaterials">
 					
 					<thead>
@@ -70,19 +70,22 @@
 					<tbody>
 						@foreach($job->materials() as $item)
 						<tr>
-							<td class="reference">{{$item->material->reference}}</td>
-							<td class="name">{{$item->material->name}}</td>
-							<td class="unity">{{$item->material->unity->name}}</td>
+							<td class="reference">{{$item->expense_jobable->reference}}<input type="hidden" name="Material[material_id][]" value="{{$item->expense_jobable->id}}"></td>
+							<td class="name">{{$item->expense_jobable->name}}</td>
+							<td class="unity">{{$item->expense_jobable->unity->name}}</td>
 							<td class="quantity">
-								<input type="number" onclick="select();" name="quantity[{{$item->material->id}}]" value="{{floatval($item->quantity)}}" step="0.01" min="0">
+								<input type="number" onclick="select();" name="Material[quantity][]" value="{{floatval($item->quantity)}}" step="0.01" min="0">
 							</td>
-							<td class="total">{{$item->total()}} €</td>
+							<td>{{$item->expense_jobable->price}}</td>
+							<td>{{ number_format($item->expense_jobable->discountInvoiceJob($job->id),2) }}</td>
+							<td class="total">{{number_format($item->expense_jobable->priceInvoiceJob($job->id),2)}} €<input type="hidden" name="Material[expense_id][]" value="{{$item->id}}"></td>
 							<td><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td>
 						</tr>
 						@endforeach
 					</tbody>
 
 				</table>
+				<h2 class="text-center">Mão de Obra</h2>
 				<table class="table table-bordered" id="jobItemsEmployees">
 					
 					<thead>
@@ -100,27 +103,41 @@
 					<tbody>
 						@foreach($job->employees() as $item)
 						<tr>
-							<td class="number">{{$item->expense_jobable->number}}</td>
-							<td class="name">{{$item->expense_jobable->name}}</td>
+							<td class="number">{{$item->expense_jobable->number}}<input type="hidden" name="Employee[employee_id][]" value="{{$item->expense_jobable->id}}"></td>
+							<td class="name">{{$item->expense_jobable->name}}<input type="hidden" name="Employee[expense_id][]" value="{{$item->id}}"></td>
 							<td class="salary">{{$item->expense_jobable->salary}}</td>
 							<td class="value_hour">{{$item->expense_jobable->value_hour}}</td>
 							<td class="quantity">
-								<input type="number" onclick="select();" name="quantity[{{$item->expense_id}}]" value="{{floatval($item->quantity)}}" step="0.01" min="0">
+								<input type="number" onclick="select();" name="Employee[quantity][]" value="{{floatval($item->quantity)}}" step="0.01" min="0">
 							</td>
 							<td class="value_extra_hour">{{$item->expense_jobable->value_extra_hour}}</td>
-							<td class="quantity-extra">
-								<input type="number" onclick="select();" name="quantityExtra[{{$item->expense_id}}]" value="{{floatval($item->quantity_extra)}}" step="0.01" min="0">
+							<td class="quantity_extra">
+								<input type="number" onclick="select();" name="Employee[quantity_extra][]" value="{{floatval($item->quantity_extra)}}" step="0.01" min="0">
 							</td>
-							<td class="total">{{$item->total()}} €</td>
+							<td class="total">{{$item->total}} €</td>
 							<td><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td>
 						</tr>
 						@endforeach
 					</tbody>
 
 				</table>
-				<div class="text-center">
+				<h2 class="text-center">Ganhos</h2>
+				<table class="table table-bordered" id="jobItemsProfits">
+					
+					<thead>
+						<tr>
+							<th>Número</th>
+							<th>Data</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+				</table>
+				<div class="text-center mt-3">
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addExpensesModal"><i class="far fa-plus-square mr-2"></i>Gasto</button>
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#"><i class="far fa-plus-square mr-2"></i>Ganho</button>
+					<button type="button" class="btn btn-primary" id="addProfitButton"><i class="far fa-plus-square mr-2"></i>Ganho</button>
 					<input type="submit" class="btn btn-primary" name="" value="Guardar">
 				</div>
 				@include('modals.addExpensesModal')
@@ -167,11 +184,12 @@
 		        ajax: "{{ route('employees.insert') }}",
 		        columns: [
 		            {data: 'id', name: 'id', className: 'id'},
-		            {data: 'number', name: 'number'},
-		            {data: 'name', name: 'name'},
+		            {data: 'number', name: 'number', className: 'number'},
+		            {data: 'name', name: 'name', className: 'name'},
 		            {data: 'admission_date', name: 'admission_date'},
-		            {data: 'salary', name: 'salary'},
-		            {data: 'value_hour', name: 'value_hour'},
+		            {data: 'salary', name: 'salary', className: 'salary'},
+		            {data: 'value_hour', name: 'value_hour', className: 'value_hour'},
+		            {data: 'value_extra_hour', name: 'value_extra_hour', className: 'value_extra_hour'},
 		            {data: 'action', name: 'action', orderable: false, searchable: false},
 		        ],
 		        "order": [[ 1, "asc" ]]
@@ -192,13 +210,31 @@
 				discount: row.querySelector('.discount').textContent,
 				tax: row.querySelector('.tax').textContent
 			}
-			var html = '<tr><td class="reference">'+material.reference+'</td><td class="name">'+material.name+'</td><td class="unity">'+material.unity+'</td><td class="quantity">							<input type="number" onclick="select();" name="quantity['+material.id+']" value="0" step="0.01" min="0"></td><td class="price">'+material.price+'</td><td class="discount">'+material.discount+'</td><td class="total">0,00 €</td><td class="tax">'+material.tax+'</td><td><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td></tr>';
-			$('#jobItems tbody').append(html);
+			var html = '<tr><td class="reference">'+material.reference+'<input type="hidden" name="Material[material_id][]" value="'+material.id+'"></td><td class="name">'+material.name+'</td><td class="unity">'+material.unity+'</td><td class="quantity"><input type="number" onclick="select();" name="Material[quantity][]" value="0" step="0.01" min="0"></td><td class="price">'+material.price+'</td><td class="discount">'+material.discount+'</td><td class="total">0,00 €<input type="hidden" name="Material[expense_id][]" value="0"></td><td><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td></tr>';
+			$('#jobItemsMaterials tbody').append(html);
+		}
+		var array_employees = @json($job->employeesIds());
+		function insertEmployee(el)
+		{
+			var row = el.closest('tr');
+			var employee = {
+				id: row.querySelector('.id').textContent,
+				number: row.querySelector('.number').textContent,
+				name: row.querySelector('.name').textContent,
+				salary: row.querySelector('.salary').textContent,
+				value_hour: row.querySelector('.value_hour').textContent,
+				value_extra_hour: row.querySelector('.value_extra_hour').textContent,
+			}
+			if (!array_employees.includes(employee.id)){
+				var html = '<tr><td class="number">'+employee.number+'<input type="hidden" name="Employee[employee_id][]" value="'+employee.id+'"></td><td class="name">'+employee.name+'<input type="hidden" name="Employee[expense_id][]" value="0"></td><td class="salary">'+employee.salary+'</td><td class="value_hour">'+employee.value_hour+'</td><td class="quantity"><input type="number" onclick="select();" name="Employee[quantity][]" value="0" step="0.01" min="0"></td><td class="value_extra_hour">'+employee.value_extra_hour+'</td><td class="quantity_extra"><input type="number" onclick="select();" name="Employee[quantity_extra][]" value="0" step="0.01" min="0"></td><td class="total">0,00 €</td><td><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td></tr>';
+				array_employees.push(employee.id);
+				$('#jobItemsEmployees tbody').append(html);
+			}
 		}
 
 		$(document).ready(function(){
 
-			$(document).on('change', '#jobItems td.quantity input', function(event){
+			$(document).on('change', '#jobItemsMaterials td.quantity input', function(event){
 
 				var row = event.target.closest('tr');
 				var price = Number(row.querySelector('.price').textContent);
@@ -206,8 +242,22 @@
 				var total = price* quantity;
 				row.querySelector('.total').innerHTML = total.toFixed(2) + " €";
 			});
-			$(document).on('click', '#jobItems td .delete-row', function(event){
+			$(document).on('change', '#jobItemsEmployees td input', function(event){
+
+				var row = event.target.closest('tr');
+				var price = Number(row.querySelector('.value_hour').textContent);
+				var quantity = Number(row.querySelector('.quantity input').value);
+				var price_extra = Number(row.querySelector('.value_extra_hour').textContent);
+				var quantity_extra = Number(row.querySelector('.quantity_extra input').value);
+				var total = (price* quantity) + (price_extra * quantity_extra);
+				row.querySelector('.total').innerHTML = total.toFixed(2) + " €";
+			});
+			$(document).on('click', 'table td .delete-row', function(event){
 				$(this).parent().parent().remove();
+			});
+			$('#addProfitButton').on('click', function(){
+				var html = '<tr><td><input type="text" name="Profit[number][]"></td><td><input type="date" name="Profit[date][]"></td><td><input type="number" name="Profit[total][]"></td><td><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td></tr>';
+				$('#jobItemsProfits tbody').append(html);
 			});
 
 		});
