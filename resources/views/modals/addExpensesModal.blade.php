@@ -31,9 +31,8 @@
                           <th>Fornecedor</th>
                           <th>Categoria</th>
                           <th>Tipo</th>
-                          <th>Stock</th>
                           <th>Desconto</th>
-                          <th>IVA</th>
+                          <th>Stock</th>
                           <th width="100px">Ações</th>
                       </tr>
                   </thead>

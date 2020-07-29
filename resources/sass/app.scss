@@ -16,7 +16,7 @@
 html, body{
 	font-family: 'Roboto', sans-serif;
 }
-main, .sidebar{
+main, .sidebar, .home-background{
 	min-height: calc(100vh - 106px);
 }
 .title{
@@ -80,15 +80,23 @@ label{
 
 	th{
 		text-align: right;
-		width: 60%;
+		width: 62%;
 	}
 	td{
-		width: 40%;
+		width: 38%;
 	}
 	th, td{
 		padding: 0.75rem 0.5rem;
 	}
 
+}
+.job-table{
+	border-top: 2px solid #dee2e6;
+	border-bottom: 2px solid #dee2e6;
+}
+.delete-cell{
+	width: 60px;
+	border: none!important;
 }
 .data-table-modal, .data-table-materials, .data-table-employees, .data-table-equipments{
 	width: 100%!important;
@@ -103,6 +111,16 @@ label{
 .modal-header{
 	border-bottom: none;
 }
+#successModal .modal-header{
+	color: #fff;
+	background-color: $blue;
+}
+#successModal .modal-body{
+	text-transform: uppercase;
+}
+#successModal .close{
+	color: #fff;
+}
 
 @media (min-width: 768px){
 
@@ -112,6 +130,9 @@ label{
 	}
 	.modal-dialog{
 		max-width: 90%;
+	}
+	#successModal .modal-sm{
+		max-width: 350px;
 	}
 
 }

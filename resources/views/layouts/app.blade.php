@@ -101,9 +101,25 @@
 
         </footer>
         @yield('modals')
+        @if(session('success'))
+            @include('modals.successModal')
+        @endif
+        @if(session('error'))
+            @include('modals.errorModal')
+        @endif
     </div>
      <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('scripts')
+    @if (session('success'))
+        <script type="text/javascript">
+            $('#successModal').modal('show');
+        </script>
+    @endif
+    @if (session('error'))
+        <script type="text/javascript">
+            $('#errorModal').modal('show');
+        </script>
+    @endif
 </body>
 </html>

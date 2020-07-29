@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class JobExpense extends Model
 {
-	public function linkMaterial($item)
+	public function linkMaterial($item, $job_id, $quantity, $total)
 	{
-		$this->job_id = $item->job_id;
-		$this->quantity = $item->quantity;
-		$this->total = $item->total();
+		$this->job_id = $job_id;
+		$this->quantity = $quantity;
+		$this->total = $total;
 		$this->save();
-		$item->material->job_expense()->save($this);
+		$item->job_expense()->save($this);
 	}
 
 	public function linkEmployee($employee, $job_id, $quantity, $quantity_extra, $total)

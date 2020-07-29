@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\InvoiceItem;
 use App\Material;
 use DataTables;
 use Illuminate\Http\Request;
@@ -95,8 +96,12 @@ class MaterialController extends Controller
     {
         $id = $request['id'];
         $material = Material::findOrFail($id);
-        $material->delete();
-        return ['msg' => 'O material foi eliminado'];
+        if (!$material->isInUse()){
+            $material->delete();
+            return ['msg' => 'O material foi eliminado'];
+        }else{
+            return ['msg' => 'O material está a ser utilizado, não é possivel eliminá-lo!'];
+        }
     }
 
     public function insert(Request $request)
@@ -127,6 +132,49 @@ class MaterialController extends Controller
         }
       
         return view('materials/index');
+    }
+
+    public function insertInJob($job_id, Request $request)
+    {
+        if ($request->ajax()) {
+            $data = InvoiceItem::where('job_id', null)->get();
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->editColumn('supplier_id', function($row){
+                        return $row->material->supplier->name;
+                    })
+                    ->editColumn('reference', function($row){
+                        return $row->material->reference;
+                    })
+                     ->editColumn('name', function($row){
+                        return $row->material->name;
+                    })
+                    ->editColumn('unity_id', function($row){
+                        return $row->material->unity->name;
+                    })
+                    ->editColumn('type_id', function($row){
+                        return $row->material->type->name;
+                    })
+                    ->editColumn('category_id', function($row){
+                        return $row->material->category->name;
+                    })
+                    ->addColumn('price', function($row){
+                        return number_format($row->priceWithDiscount(),2);
+                    })
+                    ->addColumn('discount', function($row){
+                        return $row->getDiscount();
+                    })
+                    ->addColumn('stock', function($row){
+                        return $row->material->stock;
+                    })
+                    ->addColumn('action', function($row){
+   
+                           $btn = '<button type="button" data-id="'.$row->id.'" class="btn btn-primary" onClick="insertMaterial(this)"><i class="fas fa-plus-square"></i></button>';
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
     }
 
     public function getDiscount(Request $request)

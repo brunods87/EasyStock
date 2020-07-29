@@ -53,7 +53,7 @@ use App\Job;
 	</div>
 </aside>
 <div class="col-10">
-	<div class="container py-3">
+	<div class="container-fluid py-3">
 		<h1 class="mb-3 text-center">Elementos da Fatura</h1>
 		<div class="toolbar text-right">
 	        <a href="{{ route('invoices.index') }}">Voltar</a>    
@@ -66,7 +66,7 @@ use App\Job;
 					<input type="hidden" name="invoiceID" value="{{$invoice->id}}">
 				<div class="col-12">
 					
-					<table class="table table-bordered" id="invoiceItems">
+					<table class="table table-bordered text-center" id="invoiceItems">
 						
 						<thead>
 							<tr>
@@ -75,7 +75,7 @@ use App\Job;
 								<th>Unidade</th>
 								<th style="width: 70px;">Qtd</th>
 								<th>Preço Unitário</th>
-								<th>Desconto</th>
+								<th style="width: 180px;">Desconto</th>
 								<th>IVA</th>
 								<th>Total</th>
 								<th>Obra</th>
@@ -85,17 +85,17 @@ use App\Job;
 							@foreach($invoice->invoice_items as $item)
 							<tr>
 								<td class="reference">{{$item->material->reference}}<input type="hidden" name="material_id[]" value="{{$item->material->id}}"></td>
-								<td class="name">{{$item->material->name}}</td>
+								<td class="name">{{$item->material->name}}<input type="hidden" name="item_id[]" value="{{$item->id}}"></td>
 								<td class="unity">{{$item->material->unity->name}}</td>
 								<td class="quantity">
-									<input type="number" data-id="{{$item->material->id}}" onclick="select();" name="quantity[]" value="{{floatval($item->quantity)}}" step="0.01" min="0">
+									<input type="number" class="quantity-input" data-id="{{$item->material->id}}" onclick="select();" name="quantity[]" value="{{floatval($item->quantity)}}" step="0.01" min="0">
 								</td>
 								<td class="price">{{$item->material->price}}</td>
 								<td class="discount"><input type="number" class="material-discount" min=0 onclick="select();" name="discount_1[]" value="{{floatval($item->discount_1)}}"> + <input type="number" name="discount_2[]" class="extra-discount" min=0 onclick="select();" value="{{floatval($item->discount_2)}}"></td>
 								<td class="tax">{{$item->material->tax}}</td>
 								<td class="total">{{$item->total()}} €</td>
 								<td class="job"><select class="job-select" name="job[]">{!! Job::dropdownSelect($item->job_id) !!}</select></td>
-								<td><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td>
+								<td><button type="button" data-id="{{$item->id}}" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td>
 							</tr>
 							@endforeach
 						</tbody>
@@ -162,7 +162,7 @@ use App\Job;
 				tax: row.querySelector('.tax').textContent
 			}
 
-			var html = '<tr><td class="reference">'+material.reference+'<input type="hidden" name="material_id[]" value="'+material.id+'"></td><td class="name">'+material.name+'</td><td class="unity">'+material.unity+'</td><td class="quantity"><input type="number" class="quantity-input" onclick="select();" data-id="'+material.id+'" name="quantity[]" value="0" step="0.01" min="0"></td><td class="price">'+material.price+'</td><td class="discount"><input type="number" name="discount_1[]" class="material-discount" value='+material.discount+' onclick="select();" data-id="'+material.id+'" min="0"> + <input type="number" value=0 onclick="select();" name="discount_2[]" class="extra-discount" data-id="'+material.id+'" min="0"></td><td class="tax">'+material.tax+'</td><td class="total">0,00 €</td><td><select class="job-select" name="job[]">'+jobsDropdown+'</select></td><td><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td></tr>';
+			var html = '<tr><td class="reference">'+material.reference+'<input type="hidden" name="material_id[]" value="'+material.id+'"></td><td class="name">'+material.name+'<input type="hidden" name="item_id[]" value="0"></td><td class="unity">'+material.unity+'</td><td class="quantity"><input type="number" class="quantity-input" onclick="select();" data-id="'+material.id+'" name="quantity[]" value="0" step="0.01" min="0"></td><td class="price">'+material.price+'</td><td class="discount"><input type="number" name="discount_1[]" class="material-discount" value='+material.discount+' onclick="select();" data-id="'+material.id+'" min="0"> + <input type="number" value=0 onclick="select();" name="discount_2[]" class="extra-discount" data-id="'+material.id+'" min="0"></td><td class="tax">'+material.tax+'</td><td class="total">0,00 €</td><td><select class="job-select" name="job[]">'+jobsDropdown+'</select></td><td><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td></tr>';
 			$('#invoiceItems tbody').append(html);
 			
 		}
@@ -202,7 +202,21 @@ use App\Job;
 				
 			});
 			$(document).on('click', '#invoiceItems td .delete-row', function(event){
-				$(this).parent().parent().remove();
+				var id = $(this).data('id');
+				if (id){
+					if (confirm('Eliminar o elemento da fatura?')){
+						$.ajax({
+							type: 'POST',
+							url: '{{route("invoiceItem.destroy")}}',
+							data: {id: id}
+						}).done(function(response){
+							alert(response.msg);
+							location.reload();
+						});
+					}
+				}else{
+					$(this).parent().parent().remove();
+				}
 			});
 
 		});

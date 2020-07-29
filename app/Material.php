@@ -76,11 +76,6 @@ class Material extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function job_expense()
-    {
-        return $this->morphOne(JobExpense::class, 'expense_jobable', 'expense_type', 'expense_id');
-    }
-
     public function job()
     {
     	return $this->job_expense->job;    
@@ -110,22 +105,11 @@ class Material extends Model
         return $discount;
     }
 
-    public function priceInvoiceJob($jobId)
+    public function isInUse()
     {
-        $invoiceItem = InvoiceItem::where('material_id', $this->id)->where('job_id', $jobId)->first();
-        if (is_null($invoiceItem)){
-            return false;
-        }
-        return $invoiceItem->total();
-    }
-
-    public function discountInvoiceJob($jobId)
-    {
-        $invoiceItem = InvoiceItem::where('material_id', $this->id)->where('job_id', $jobId)->first();
-        if (is_null($invoiceItem)){
-            return 0;
-        }
-        return $invoiceItem->getDiscount() * $invoiceItem->quantity;
+        $invoiceItems = InvoiceItem::where('material_id', $this->id)->get(); 
+        if (count($invoiceItems > 0)) return true;
+        return false;
     }
 
 }

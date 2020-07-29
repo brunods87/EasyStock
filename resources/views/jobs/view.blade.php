@@ -42,19 +42,26 @@
 </aside>
 <div class="col-10">
 <div class="container py-3">
+	<form method="POST" action="{{ route('jobs.storeItems') }}">
+		@csrf
 	<h1 class="mb-3 text-center">Elementos da Obra</h1>
-		<div class="toolbar text-right">
+		<div class="toolbar text-right justify-content-between">
+			<div class="text-left">
+				<button type="button" class="btn btn-primary mr-3" data-toggle="modal" data-target="#addExpensesModal"><i class="far fa-plus-square mr-2"></i>Gasto</button>
+				<button type="button" class="btn btn-primary mr-3 addProfitButton"><i class="far fa-plus-square mr-2"></i>Ganho</button>
+				<button type="submit" class="btn btn-primary"><i class="far fa-save mr-2"></i>Guardar</button>
+			</div>
         <a href="{{ route('jobs.index') }}">Voltar</a>    
     </div>
 	<div class="row justify-content-center mt-3">
 		
 		<div class="form col-12">
-			<form method="POST" action="{{ route('jobs.storeItems') }}">
-				@csrf
+			
 				<input type="hidden" name="jobID" value="{{$job->id}}">
+				
 			<div class="col-12">
-				<h2 class="text-center">Materiais</h2>
-				<table class="table table-bordered" id="jobItemsMaterials">
+				<h4 class="text-center">Materiais</h4>
+				<table class="table job-table" id="jobItemsMaterials">
 					
 					<thead>
 						<tr>
@@ -70,23 +77,24 @@
 					<tbody>
 						@foreach($job->materials() as $item)
 						<tr>
-							<td class="reference">{{$item->expense_jobable->reference}}<input type="hidden" name="Material[material_id][]" value="{{$item->expense_jobable->id}}"></td>
-							<td class="name">{{$item->expense_jobable->name}}</td>
-							<td class="unity">{{$item->expense_jobable->unity->name}}</td>
+							<td class="reference">{{$item->expense_jobable->material->reference}}<input type="hidden" name="Material[materialItem_id][]" value="{{$item->expense_jobable->id}}"></td>
+							<td class="name">{{$item->expense_jobable->material->name}}<input type="hidden" name="Material[expense_id][]" value="{{$item->id}}"></td>
+							<td class="unity">{{$item->expense_jobable->material->unity->name}}</td>
 							<td class="quantity">
 								<input type="number" onclick="select();" name="Material[quantity][]" value="{{floatval($item->quantity)}}" step="0.01" min="0">
 							</td>
-							<td>{{$item->expense_jobable->price}}</td>
-							<td>{{ number_format($item->expense_jobable->discountInvoiceJob($job->id),2) }}</td>
-							<td class="total">{{number_format($item->expense_jobable->priceInvoiceJob($job->id),2)}} €<input type="hidden" name="Material[expense_id][]" value="{{$item->id}}"></td>
-							<td><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td>
+							<td>{{$item->expense_jobable->material->price}}</td>
+							<td>{{ number_format($item->expense_jobable->discountInvoiceJob(),2) }}</td>
+							<td class="total">{{number_format($item->expense_jobable->total(),2)}} €</td>
+							<td class="delete-cell"><button type="button" data-id="{{$item->id}}" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td>
 						</tr>
 						@endforeach
 					</tbody>
 
 				</table>
-				<h2 class="text-center">Mão de Obra</h2>
-				<table class="table table-bordered" id="jobItemsEmployees">
+				<hr>
+				<h4 class="text-center">Mão de Obra</h4>
+				<table class="table job-table" id="jobItemsEmployees">
 					
 					<thead>
 						<tr>
@@ -115,14 +123,15 @@
 								<input type="number" onclick="select();" name="Employee[quantity_extra][]" value="{{floatval($item->quantity_extra)}}" step="0.01" min="0">
 							</td>
 							<td class="total">{{$item->total}} €</td>
-							<td><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td>
+							<td class="delete-cell"><button type="button" data-id="{{$item->id}}" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td>
 						</tr>
 						@endforeach
 					</tbody>
 
 				</table>
-				<h2 class="text-center">Ganhos</h2>
-				<table class="table table-bordered" id="jobItemsProfits">
+				<hr>
+				<h4 class="text-center">Ganhos</h4>
+				<table class="table job-table" id="jobItemsProfits">
 					
 					<thead>
 						<tr>
@@ -132,19 +141,27 @@
 						</tr>
 					</thead>
 					<tbody>
-
+						@foreach($job->job_profits as $item)
+						<tr>
+							<td><input type="text" name="Profit[number][]" value="{{$item->number}}"></td>
+							<td><input type="date" name="Profit[date][]" value="{{$item->date}}"></td>
+							<td><input type="number" name="Profit[total][]" value="{{$item->total}}"><input type="hidden" name="Profit[profit_id][]" value="{{$item->id}}"></td>
+							<td class="delete-cell"><button type="button" data-id="{{$item->id}}" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td>
+						</tr>
+						@endforeach
 					</tbody>
 				</table>
 				<div class="text-center mt-3">
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addExpensesModal"><i class="far fa-plus-square mr-2"></i>Gasto</button>
-					<button type="button" class="btn btn-primary" id="addProfitButton"><i class="far fa-plus-square mr-2"></i>Ganho</button>
-					<input type="submit" class="btn btn-primary" name="" value="Guardar">
+					<button type="button" class="btn btn-primary mr-3" data-toggle="modal" data-target="#addExpensesModal"><i class="far fa-plus-square mr-2"></i>Gasto</button>
+					<button type="button" class="btn btn-primary mr-3 addProfitButton"><i class="far fa-plus-square mr-2"></i>Ganho</button>
+					<button type="submit" class="btn btn-primary"><i class="far fa-save mr-2"></i>Guardar</button>
 				</div>
 				@include('modals.addExpensesModal')
 
 			</div>
-			</form>
+			
 		</div>
+		</form>
 	</div>
 
 </div>
@@ -160,7 +177,7 @@
 		    var table = $('.data-table-materials').DataTable({
 		        processing: true,
 		        serverSide: true,
-		        ajax: "{{ route('materials.insert') }}",
+		        ajax: "{{ route('materials.insertInJob', ['job_id' => $job->id]) }}",
 		        columns: [
 		            {data: 'id', name: 'id', className: 'id'},
 		            {data: 'name', name: 'name', className: 'name'},
@@ -170,9 +187,8 @@
 		            {data: 'supplier_id', name: 'supplier_id', className: 'supplier'},
 		            {data: 'category_id', name: 'category_id', className: 'category'},
 		            {data: 'type_id', name: 'type_id', className: 'type'},
-		            {data: 'stock', name: 'stock', className: 'stock'},
 		            {data: 'discount', name: 'discount', className: 'discount'},
-		            {data: 'tax', name: 'tax', className: 'tax'},
+		            {data: 'stock', name: 'stock', className: 'stock'},
 		            {data: 'action', name: 'action', orderable: false, searchable: false},
 		        ],
 		        "order": [[ 1, "asc" ]]
@@ -208,10 +224,12 @@
 				unity: row.querySelector('.unity').textContent,
 				price: row.querySelector('.price').textContent,
 				discount: row.querySelector('.discount').textContent,
-				tax: row.querySelector('.tax').textContent
+				stock: Number(row.querySelector('.stock').textContent)
 			}
-			var html = '<tr><td class="reference">'+material.reference+'<input type="hidden" name="Material[material_id][]" value="'+material.id+'"></td><td class="name">'+material.name+'</td><td class="unity">'+material.unity+'</td><td class="quantity"><input type="number" onclick="select();" name="Material[quantity][]" value="0" step="0.01" min="0"></td><td class="price">'+material.price+'</td><td class="discount">'+material.discount+'</td><td class="total">0,00 €<input type="hidden" name="Material[expense_id][]" value="0"></td><td><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td></tr>';
-			$('#jobItemsMaterials tbody').append(html);
+			if (material.stock > 0){
+				var html = '<tr><td class="reference">'+material.reference+'<input type="hidden" name="Material[materialItem_id][]" value="'+material.id+'"></td><td class="name">'+material.name+'<input type="hidden" name="Material[expense_id][]" value="0"></td><td class="unity">'+material.unity+'</td><td class="quantity"><input type="number" onclick="select();" name="Material[quantity][]" value="0" step="0.01" min="0"></td><td class="price">'+material.price+'</td><td class="discount">'+material.discount+'</td><td class="total">0,00 €</td><td class="delete-cell"><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td></tr>';
+				$('#jobItemsMaterials tbody').append(html);
+			}
 		}
 		var array_employees = @json($job->employeesIds());
 		function insertEmployee(el)
@@ -226,7 +244,7 @@
 				value_extra_hour: row.querySelector('.value_extra_hour').textContent,
 			}
 			if (!array_employees.includes(employee.id)){
-				var html = '<tr><td class="number">'+employee.number+'<input type="hidden" name="Employee[employee_id][]" value="'+employee.id+'"></td><td class="name">'+employee.name+'<input type="hidden" name="Employee[expense_id][]" value="0"></td><td class="salary">'+employee.salary+'</td><td class="value_hour">'+employee.value_hour+'</td><td class="quantity"><input type="number" onclick="select();" name="Employee[quantity][]" value="0" step="0.01" min="0"></td><td class="value_extra_hour">'+employee.value_extra_hour+'</td><td class="quantity_extra"><input type="number" onclick="select();" name="Employee[quantity_extra][]" value="0" step="0.01" min="0"></td><td class="total">0,00 €</td><td><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td></tr>';
+				var html = '<tr><td class="number">'+employee.number+'<input type="hidden" name="Employee[employee_id][]" value="'+employee.id+'"></td><td class="name">'+employee.name+'<input type="hidden" name="Employee[expense_id][]" value="0"></td><td class="salary">'+employee.salary+'</td><td class="value_hour">'+employee.value_hour+'</td><td class="quantity"><input type="number" onclick="select();" name="Employee[quantity][]" value="0" step="0.01" min="0"></td><td class="value_extra_hour">'+employee.value_extra_hour+'</td><td class="quantity_extra"><input type="number" onclick="select();" name="Employee[quantity_extra][]" value="0" step="0.01" min="0"></td><td class="total">0,00 €</td><td class="delete-cell"><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td></tr>';
 				array_employees.push(employee.id);
 				$('#jobItemsEmployees tbody').append(html);
 			}
@@ -252,11 +270,59 @@
 				var total = (price* quantity) + (price_extra * quantity_extra);
 				row.querySelector('.total').innerHTML = total.toFixed(2) + " €";
 			});
-			$(document).on('click', 'table td .delete-row', function(event){
-				$(this).parent().parent().remove();
+			$(document).on('click', '#jobItemsMaterials td .delete-row', function(event){
+				var id = $(this).data('id');
+				if (id){
+					if (confirm('Eliminar o material da folha de obra?')){
+						$.ajax({
+							type: 'POST',
+							url: '{{route("jobExpense.destroy")}}',
+							data: {id: id}
+						}).done(function(response){
+							alert(response.msg);
+							location.reload();
+						});
+					}
+				}else{
+					$(this).parent().parent().remove();
+				}
 			});
-			$('#addProfitButton').on('click', function(){
-				var html = '<tr><td><input type="text" name="Profit[number][]"></td><td><input type="date" name="Profit[date][]"></td><td><input type="number" name="Profit[total][]"></td><td><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td></tr>';
+			$(document).on('click', '#jobItemsEmployees td .delete-row', function(event){
+				var id = $(this).data('id');
+				if (id){
+					if (confirm('Eliminar o empregado da folha de obra?')){
+						$.ajax({
+							type: 'POST',
+							url: '{{route("jobExpense.destroy")}}',
+							data: {id: id}
+						}).done(function(response){
+							alert(response.msg);
+							location.reload();
+						});
+					}
+				}else{
+					$(this).parent().parent().remove();
+				}
+			});
+			$(document).on('click', '#jobItemsProfits td .delete-row', function(event){
+				var id = $(this).data('id');
+				if (id){
+					if (confirm('Eliminar a receita da folha de obra?')){
+						$.ajax({
+							type: 'POST',
+							url: '{{route("jobProfit.destroy")}}',
+							data: {id: id}
+						}).done(function(response){
+							alert(response.msg);
+							location.reload();
+						});
+					}
+				}else{
+					$(this).parent().parent().remove();
+				}
+			});
+			$('.addProfitButton').on('click', function(){
+				var html = '<tr><td><input type="text" name="Profit[number][]"></td><td><input type="date" name="Profit[date][]"></td><td><input type="number" name="Profit[total][]" min="0" step="0.01"><input type="hidden" name="Profit[profit_id][]" value="0"></td><td class="delete-cell"><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td></tr>';
 				$('#jobItemsProfits tbody').append(html);
 			});
 

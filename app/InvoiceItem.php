@@ -64,12 +64,31 @@ class InvoiceItem extends Model
         return $this->belongsTo(Material::class);
     }
 
+    public function job()
+    {
+        return $this->belongsTo(Job::class);
+    }
+
+    public function job_expense()
+    {
+        return $this->morphOne(JobExpense::class, 'expense_jobable', 'expense_type', 'expense_id');
+    }
+
+    public function discountInvoiceJob()
+    {
+        return $this->getDiscount() * $this->quantity;
+    }
+
     public function linkJob()
     {
-        $exists = JobExpense::where('job_id', $this->job_id)->where('expense_id', $this->material_id)->first();
-        if (is_null($exists)){
+        $expense = JobExpense::where('job_id', $this->job_id)->where('expense_id', $this->id)->first();
+        if (is_null($expense)){
             $newExpense = new JobExpense();
-            $newExpense->linkMaterial($this);
+            $newExpense->linkMaterial($this, $this->job_id, $this->quantity, $this->total());
+        }else{
+            $expense->quantity = $this->quantity;
+            $expense->total = $this->total();
+            $expense->save();
         }
     }
 }

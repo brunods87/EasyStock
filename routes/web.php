@@ -35,6 +35,8 @@ Route::group( ['middleware' => 'auth' ], function()
 	Route::post('/jobs', 'JobController@destroy');
 		Route::post('/jobItems/store', 'JobController@storeItems')->name('jobs.storeItems');
 		Route::post('/jobs/getJobs', 'JobController@getJobs')->name('jobs.getJobs');
+		Route::post('/jobExpenses/destroy', 'JobExpenseController@destroy')->name('jobExpense.destroy');
+		Route::post('/jobProfits/destroy', 'JobProfitController@destroy')->name('jobProfit.destroy');
 
 	//MATERIALS
 	Route::get('/materials', 'MaterialController@index')->name('materials.index');
@@ -44,6 +46,7 @@ Route::group( ['middleware' => 'auth' ], function()
 	Route::post('/materials/update/{id}', 'MaterialController@update');
 	Route::post('/materials', 'MaterialController@destroy');
 	Route::get('/materials/insert', 'MaterialController@insert')->name('materials.insert');
+	Route::get('/materials/insertInJob/{job_id}', 'MaterialController@insertInJob')->name('materials.insertInJob');
 	Route::post('/materials/getDiscount', 'MaterialController@getDiscount')->name('materials.discount');
 
 		//CATEGORIES
@@ -88,6 +91,7 @@ Route::group( ['middleware' => 'auth' ], function()
 
 		//INVOICE_ITEMS
 		Route::post('/invoiceItems/store', 'InvoiceItemController@store')->name('invoiceItem.store');
+		Route::post('/invoiceItems/destroy', 'InvoiceItemController@destroy')->name('invoiceItem.destroy');
 
 	//SUPPLIERS
 	Route::get('/suppliers', 'SupplierController@index')->name('suppliers.index');

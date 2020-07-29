@@ -73,7 +73,7 @@ class Job extends Model
 
     public function materials()
     {
-        return $this->job_expenses()->where('expense_type', 'App\Material')->get();
+        return $this->job_expenses()->where('expense_type', 'App\InvoiceItem')->get();
     }
 
     public function employees()

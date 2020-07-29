@@ -85,6 +85,9 @@ class InvoiceController extends Controller
     {
         $id = $request['id'];
         $invoice = Invoice::findOrFail($id);
+        foreach ($invoice->invoice_items as $item) {
+            $item->delete();
+        }
         $invoice->delete();
         return ['msg' => 'A fatura foi eliminada'];
     }

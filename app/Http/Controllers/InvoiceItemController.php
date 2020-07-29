@@ -16,24 +16,62 @@ class InvoiceItemController extends Controller
 		$data = $request->post();
 		$invoice_id = intval($data['invoiceID']);
 		$invoice = Invoice::findOrFail($invoice_id);
-		InvoiceItem::where('invoice_id', $invoice_id)->delete();
-		for($i = 0; $i < sizeof($data['material_id']); $i++) {
-			if ($data['quantity'][$i] > 0){
-				$item = new InvoiceItem();
-				$item->invoice_id = $invoice_id;
-				$item->material_id = $data['material_id'][$i];
-				$item->quantity = $data['quantity'][$i];
-				$item->discount_1 = $data['discount_1'][$i];
-				$item->discount_2 = $data['discount_2'][$i];
-				$item->job_id = $data['job'][$i];
+
+		for($row = 0; $row < sizeof($data['material_id']); $row++) {
+			if ($data['quantity'][$row] > 0){
+				$item_id = $data['item_id'][$row];
+				if ($item_id > 0){
+					$item = InvoiceItem::findOrFail($item_id);	
+					if ($data['quantity'][$row] > $item->quantity){
+						$increment = $data['quantity'][$row] - $item->quantity;
+						$material = $item->material;
+						$material->stock += $increment;
+						$material->save();
+					}elseif($data['quantity'][$row] < $item->quantity){
+						$withraw = $item->quantity - $data['quantity'][$row];
+						$material = $item->material;
+						$material->stock -= $withraw;
+						$material->save();
+					}
+				}else{
+					$item = new InvoiceItem();	
+					$item->invoice_id = $invoice_id;
+					$item->material_id = $data['material_id'][$row];
+				}
+				$item->quantity = $data['quantity'][$row];
+				$item->discount_1 = $data['discount_1'][$row];
+				$item->discount_2 = $data['discount_2'][$row];
+				$item->job_id = $data['job'][$row];
 				$item->save();
 				if ($item->job_id){
 					$item->linkJob();	
+				}elseif($item_id == 0){
+					$material = $item->material;
+					$material->stock += $item->quantity;
+					$material->save();
 				}
 			}
 		}
 
-		return redirect('invoices/view/'.$invoice_id);
+		return redirect('invoices/view/'.$invoice_id)->with('success', 'Fatura guardada');
+    }
+
+    public function destroy(Request $request)
+    {
+        $data = $request->post();
+        $item = InvoiceItem::findOrFail($data['id']);
+        if ($item->job){
+        	$item->job_expense->delete();
+        }else{
+        	$material = $item->material;
+        	$material->stock -= $item->quantity;
+        	if ($material->stock < 0){
+        		$material->stock = 0;
+        	}
+        	$material->save();
+        }
+        $item->delete();
+        return ['msg' => 'O elemento foi eliminado'];
     }
 
 }
