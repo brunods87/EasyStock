@@ -88,6 +88,8 @@ Route::group( ['middleware' => 'auth' ], function()
 	Route::post('/invoices/update/{id}', 'InvoiceController@update');
 	Route::get('/invoices/view/{id}', 'InvoiceController@view')->name('invoices.view');
 	Route::post('/invoices', 'InvoiceController@destroy');
+	Route::get('/invoices/exportPdf/{id}', 'InvoiceController@exportPdf')->name('invoices.exportPdf');
+	Route::get('/invoices/exportExcel/{id}', 'InvoiceController@exportExcel')->name('invoices.exportExcel');
 
 		//INVOICE_ITEMS
 		Route::post('/invoiceItems/store', 'InvoiceItemController@store')->name('invoiceItem.store');

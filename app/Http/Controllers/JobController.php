@@ -145,7 +145,7 @@ class JobController extends Controller
                     $expense->save();
                 }else{
                     $expense = new JobExpense();
-                    $expense->linkMaterial($materialItem, $job_id, $quantity, $total);
+                    
                     if (!$materialItem->job && $job->type == 'faturado'){
                         if ($quantity > $material->stock){
                             return redirect('jobs/view/'.$job_id)->with('error', 'Quantidade em stock insuficiente ['.$material->name.']');
@@ -153,6 +153,7 @@ class JobController extends Controller
                         $material->stock -= $quantity;
                         $material->save();
                     }
+                    $expense->linkMaterial($materialItem, $job_id, $quantity, $total);
                     $materialItem->job_id = $job_id;
                     $materialItem->save();
                 }

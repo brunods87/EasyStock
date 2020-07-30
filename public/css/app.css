@@ -17524,6 +17524,11 @@ a:hover {
   margin-left: 0.5rem;
 }
 
+.toolbar a:hover {
+  background-color: #fff;
+  color: #019FCE;
+}
+
 .form-group {
   display: flex;
   justify-content: center;
@@ -17582,17 +17587,78 @@ label {
   border-bottom: none;
 }
 
-#successModal .modal-header {
+#successModal .modal-header,
+#errorModal .modal-header {
   color: #fff;
   background-color: #019FCE;
 }
 
-#successModal .modal-body {
+#successModal .modal-body,
+#errorModal .modal-body {
   text-transform: uppercase;
 }
 
-#successModal .close {
+#successModal .close,
+#errorModal .close {
   color: #fff;
+}
+
+.profit {
+  color: #38c172;
+}
+
+.loss {
+  color: #e3342f;
+}
+
+.view {
+  background-color: #019FCE;
+  border-color: #019FCE !important;
+}
+
+.view:hover {
+  background-color: #fff;
+  color: #019FCE;
+}
+
+.edit {
+  background-color: #ffed4a;
+  border-color: #ffed4a !important;
+}
+
+.edit:hover {
+  background-color: #fff;
+  color: #ffed4a;
+}
+
+.pdf {
+  background-color: #e3342f;
+  border-color: #e3342f !important;
+}
+
+.pdf:hover {
+  background-color: #fff;
+  color: #e3342f;
+}
+
+.excel {
+  background-color: #38c172;
+  border-color: #38c172 !important;
+}
+
+.excel:hover {
+  background-color: #fff;
+  color: #38c172;
+}
+
+.delete {
+  background-color: #000;
+  border-color: #000 !important;
+}
+
+.delete:hover {
+  background-color: #fff;
+  color: #000;
 }
 
 @media (min-width: 768px) {
@@ -17605,7 +17671,8 @@ label {
     max-width: 90%;
   }
 
-  #successModal .modal-sm {
+  #successModal .modal-sm,
+  #errorModal .modal-sm {
     max-width: 350px;
   }
 }

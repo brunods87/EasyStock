@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Invoice;
 use Illuminate\Http\Request;
 use DataTables;
+use PDF;
 
 class InvoiceController extends Controller
 {
@@ -24,7 +25,9 @@ class InvoiceController extends Controller
    
                            $btn = '<a href="'.route('invoices.view', ['id' => $row->id]).'" title="Visualizar" class="view btn btn-primary btn-sm mr-2"><i class="fas fa-eye"></i></a>';
                            $btn .= '<a href="'.route('invoices.update', ['id' => $row->id]).'" title="Editar" class="edit btn btn-primary btn-sm mr-2"><i class="fas fa-edit"></i></a>';
-                            $btn .= '<a href="javascript:void(0)" data-id="'.$row->id.'" title="Eliminar" class="delete btn btn-primary btn-sm"><i class="fas fa-trash"></i></a>';
+                           $btn .= '<a href="'.route('invoices.exportPdf', ['id' => $row->id]).'" title="PDF" class="pdf btn btn-primary btn-sm mr-2"><i class="fas fa-file-pdf"></i></a>';
+                           $btn .= '<a href="'.route('invoices.exportExcel', ['id' => $row->id]).'" title="Excel" class="excel btn btn-primary btn-sm mr-2"><i class="fas fa-file-excel"></i></a>';
+                           $btn .= '<a href="javascript:void(0)" data-id="'.$row->id.'" title="Eliminar" class="delete btn btn-primary btn-sm"><i class="fas fa-trash"></i></a>';
                             return $btn;
                     })
                     ->rawColumns(['action'])
@@ -90,5 +93,17 @@ class InvoiceController extends Controller
         }
         $invoice->delete();
         return ['msg' => 'A fatura foi eliminada'];
+    }
+
+    public function exportPdf($id)
+    {
+        $data = Invoice::findOrFail($id);
+        $pdf = PDF::loadView('invoices.pdf', $data);
+        return $pdf->download('invoice.pdf');
+    }
+
+    public function exportExcel($id)
+    {
+        
     }
 }

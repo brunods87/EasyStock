@@ -20,7 +20,7 @@
                 <th>Data</th>
                 <th>Materiais</th>
                 <th>Total</th>
-                <th width="150px">Ações</th>
+                <th width="170px">Ações</th>
 
             </tr>
 

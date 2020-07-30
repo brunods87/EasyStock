@@ -137,7 +137,7 @@ class MaterialController extends Controller
     public function insertInJob($job_id, Request $request)
     {
         if ($request->ajax()) {
-            $data = InvoiceItem::where('job_id', null)->get();
+            $data = InvoiceItem::where('job_id', '!=', $job_id)->orWhereNull('job_id')->get();
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->editColumn('supplier_id', function($row){

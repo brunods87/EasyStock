@@ -111,4 +111,19 @@ class Job extends Model
         return $arrayIds;
     }
 
+    public function profit()
+    {
+        $total = 0;
+        $totalExpenses = 0;
+        $totalProfits = 0;
+        foreach ($this->job_expenses as $expense) {
+            $totalExpenses += $expense->total;
+        }
+        foreach ($this->job_profits as $profit) {
+            $totalProfits += $profit->total;
+        }
+        $total = $totalProfits - $totalExpenses;
+        return $total;
+    }
+
 }

@@ -36,6 +36,10 @@
 				<th>Tipo</th>
 				<td>{{ $job->type }}</td>
 			</tr>
+			<tr>
+				<th>Lucro</th>
+				<td class="{{ $job->profit() > 0 ? 'profit' : ($job->profit() < 0 ? 'loss' : '') }}">{{ number_format($job->profit(),2, ',','.') }} €</td>
+			</tr>
 		</table>
 	</div>
 </div>
