@@ -171,6 +171,23 @@ label{
 	background-color: #fff;
 	color: #000;
 }
+hr{
+	border: none;
+}
+.wrapper{
+	border-top: 1px solid #000;
+    padding: 1rem;
+    box-shadow: 0px -1px 0px 1px #000, 1px -1px 5px -1px #000;
+}
+.dataTables_filter{
+	margin-bottom: .5rem;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button{
+	padding: 0.2em .7em;
+}
+.dataTables_wrapper .dataTables_paginate{
+	margin-top: .5rem;
+}
 
 @media (min-width: 768px){
 

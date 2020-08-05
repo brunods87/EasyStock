@@ -28,6 +28,8 @@ class JobController extends Controller
    
                            $btn = '<a href="'.route('jobs.view', ['id' => $row->id]).'" title="Visualizar" class="view btn btn-primary btn-sm mr-2"><i class="fas fa-eye"></i></a>';
                            $btn .= '<a href="'.route('jobs.update', ['id' => $row->id]).'" title="Editar" class="edit btn btn-primary btn-sm mr-2"><i class="fas fa-edit"></i></a>';
+                           $btn .= '<a href="'.route('jobs.exportPdf', ['id' => $row->id]).'" title="PDF" class="pdf btn btn-primary btn-sm mr-2"><i class="fas fa-file-pdf"></i></a>';
+                           $btn .= '<a href="'.route('jobs.exportExcel', ['id' => $row->id]).'" title="Excel" class="excel btn btn-primary btn-sm mr-2"><i class="fas fa-file-excel"></i></a>';
                             $btn .= '<a href="javascript:void(0)" data-id="'.$row->id.'" title="Eliminar" class="delete btn btn-primary btn-sm"><i class="fas fa-trash"></i></a>';
                             return $btn;
                     })

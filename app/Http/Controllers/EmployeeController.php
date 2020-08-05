@@ -38,7 +38,7 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'number' => 'numeric',
+            'number' => 'required|max:8',
             'admission_date' => 'required|string',
             'name' => 'required|string',
             'salary' => 'numeric',
@@ -60,7 +60,7 @@ class EmployeeController extends Controller
     public function update($id, Request $request)
     {
         $data = $request->validate([
-            'number' => 'numeric',
+            'number' => 'required|max:8',
             'admission_date' => 'required|string',
             'name' => 'required|string',
             'salary' => 'numeric',

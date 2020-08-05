@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\InvoiceExport;
 use App\Invoice;
-use Illuminate\Http\Request;
 use DataTables;
+use Excel;
+use Illuminate\Http\Request;
 use PDF;
 
 class InvoiceController extends Controller
@@ -47,7 +49,7 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'number' => 'required|numeric',
+            'number' => 'required',
             'supplier_id' => 'required',
             'date' => 'required|string',
             'total' => 'nullable|numeric'
@@ -73,7 +75,7 @@ class InvoiceController extends Controller
     public function update($id, Request $request)
     {
         $data = $request->validate([
-            'number' => 'required|numeric',
+            'number' => 'required',
             'supplier_id' => 'required',
             'date' => 'required|string',
             'total' => 'nullable|numeric'
@@ -98,12 +100,12 @@ class InvoiceController extends Controller
     public function exportPdf($id)
     {
         $data = Invoice::findOrFail($id);
-        $pdf = PDF::loadView('invoices.pdf', $data);
+        $pdf = PDF::loadView('invoices.pdf', compact('data'));
         return $pdf->download('invoice.pdf');
     }
 
     public function exportExcel($id)
     {
-        
+        return Excel::download(new InvoiceExport, 'fatura.xlsx');
     }
 }

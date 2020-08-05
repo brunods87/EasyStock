@@ -22,12 +22,12 @@ class InvoiceItemController extends Controller
 				$item_id = $data['item_id'][$row];
 				if ($item_id > 0){
 					$item = InvoiceItem::findOrFail($item_id);	
-					if ($data['quantity'][$row] > $item->quantity){
+					if ($data['quantity'][$row] > $item->quantity && !$item->job_id){
 						$increment = $data['quantity'][$row] - $item->quantity;
 						$material = $item->material;
 						$material->stock += $increment;
 						$material->save();
-					}elseif($data['quantity'][$row] < $item->quantity){
+					}elseif($data['quantity'][$row] < $item->quantity && !$item->job_id){
 						$withraw = $item->quantity - $data['quantity'][$row];
 						$material = $item->material;
 						$material->stock -= $withraw;

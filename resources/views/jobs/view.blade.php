@@ -37,6 +37,14 @@
 				<td>{{ $job->type }}</td>
 			</tr>
 			<tr>
+				<th>Total Gastos</th>
+				<td>{{ number_format($job->totalExpenses(),2,',','.') }} €</td>
+			</tr>
+			<tr>
+				<th>Total Ganhos</th>
+				<td>{{ number_format($job->totalProfits(),2,',','.') }} €</td>
+			</tr>
+			<tr>
 				<th>Lucro</th>
 				<td class="{{ $job->profit() > 0 ? 'profit' : ($job->profit() < 0 ? 'loss' : '') }}">{{ number_format($job->profit(),2, ',','.') }} €</td>
 			</tr>
@@ -63,98 +71,104 @@
 			
 				<input type="hidden" name="jobID" value="{{$job->id}}">
 				
-			<div class="col-12">
-				<h4 class="text-center">Materiais</h4>
-				<table class="table job-table" id="jobItemsMaterials">
-					
-					<thead>
-						<tr>
-							<th>Referência</th>
-							<th>Descrição</th>
-							<th>Unidade</th>
-							<th style="width: 70px;">Qtd</th>
-							<th>Preço Unitário</th>
-							<th>Desconto</th>
-							<th>Total</th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach($job->materials() as $item)
-						<tr>
-							<td class="reference">{{$item->expense_jobable->material->reference}}<input type="hidden" name="Material[materialItem_id][]" value="{{$item->expense_jobable->id}}"></td>
-							<td class="name">{{$item->expense_jobable->material->name}}<input type="hidden" name="Material[expense_id][]" value="{{$item->id}}"></td>
-							<td class="unity">{{$item->expense_jobable->material->unity->name}}</td>
-							<td class="quantity">
-								<input type="number" onclick="select();" name="Material[quantity][]" value="{{floatval($item->quantity)}}" step="0.01" min="0">
-							</td>
-							<td>{{$item->expense_jobable->material->price}}</td>
-							<td>{{ number_format($item->expense_jobable->discountInvoiceJob(),2) }}</td>
-							<td class="total">{{number_format($item->expense_jobable->total(),2)}} €</td>
-							<td class="delete-cell"><button type="button" data-id="{{$item->id}}" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td>
-						</tr>
-						@endforeach
-					</tbody>
+			<div class="col-12 px-0">
+				<div class="wrapper">
+					<h4 class="text-center">Materiais</h4>
+					<table class="table job-table" id="jobItemsMaterials">
+						
+						<thead>
+							<tr>
+								<th>Referência</th>
+								<th>Descrição</th>
+								<th>Unidade</th>
+								<th style="width: 70px;">Qtd</th>
+								<th>Preço Unitário</th>
+								<th>Desconto</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($job->materials() as $item)
+							<tr>
+								<td class="reference">{{$item->expense_jobable->material->reference}}<input type="hidden" name="Material[materialItem_id][]" value="{{$item->expense_jobable->id}}"></td>
+								<td class="name">{{$item->expense_jobable->material->name}}<input type="hidden" name="Material[expense_id][]" value="{{$item->id}}"></td>
+								<td class="unity">{{$item->expense_jobable->material->unity->name}}</td>
+								<td class="quantity">
+									<input type="number" onclick="select();" name="Material[quantity][]" value="{{floatval($item->quantity)}}" step="0.01" min="0">
+								</td>
+								<td>{{$item->expense_jobable->material->price}}</td>
+								<td>{{ number_format($item->expense_jobable->discountInvoiceJob(),2) }}</td>
+								<td class="total">{{number_format($item->expense_jobable->total(),2)}} €</td>
+								<td class="delete-cell"><button type="button" data-id="{{$item->id}}" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td>
+							</tr>
+							@endforeach
+						</tbody>
 
-				</table>
-				<hr>
-				<h4 class="text-center">Mão de Obra</h4>
-				<table class="table job-table" id="jobItemsEmployees">
-					
-					<thead>
-						<tr>
-							<th>Número</th>
-							<th>Nome</th>
-							<th>Salário</th>
-							<th>Valor Hora</th>
-							<th>Quantidade</th>
-							<th>Valor Hora Extra</th>
-							<th>Quantidade Extra</th>
-							<th>Total</th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach($job->employees() as $item)
-						<tr>
-							<td class="number">{{$item->expense_jobable->number}}<input type="hidden" name="Employee[employee_id][]" value="{{$item->expense_jobable->id}}"></td>
-							<td class="name">{{$item->expense_jobable->name}}<input type="hidden" name="Employee[expense_id][]" value="{{$item->id}}"></td>
-							<td class="salary">{{$item->expense_jobable->salary}}</td>
-							<td class="value_hour">{{$item->expense_jobable->value_hour}}</td>
-							<td class="quantity">
-								<input type="number" onclick="select();" name="Employee[quantity][]" value="{{floatval($item->quantity)}}" step="0.01" min="0">
-							</td>
-							<td class="value_extra_hour">{{$item->expense_jobable->value_extra_hour}}</td>
-							<td class="quantity_extra">
-								<input type="number" onclick="select();" name="Employee[quantity_extra][]" value="{{floatval($item->quantity_extra)}}" step="0.01" min="0">
-							</td>
-							<td class="total">{{$item->total}} €</td>
-							<td class="delete-cell"><button type="button" data-id="{{$item->id}}" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td>
-						</tr>
-						@endforeach
-					</tbody>
+					</table>
+				</div>
+				<hr class="my-5">
+				<div class="wrapper">
+					<h4 class="text-center">Mão de Obra</h4>
+					<table class="table job-table" id="jobItemsEmployees">
+						
+						<thead>
+							<tr>
+								<th>Número</th>
+								<th>Nome</th>
+								<th>Salário</th>
+								<th>Valor Hora</th>
+								<th>Quantidade</th>
+								<th>Valor Hora Extra</th>
+								<th>Quantidade Extra</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($job->employees() as $item)
+							<tr>
+								<td class="number">{{$item->expense_jobable->number}}<input type="hidden" name="Employee[employee_id][]" value="{{$item->expense_jobable->id}}"></td>
+								<td class="name">{{$item->expense_jobable->name}}<input type="hidden" name="Employee[expense_id][]" value="{{$item->id}}"></td>
+								<td class="salary">{{$item->expense_jobable->salary}}</td>
+								<td class="value_hour">{{$item->expense_jobable->value_hour}}</td>
+								<td class="quantity">
+									<input type="number" onclick="select();" name="Employee[quantity][]" value="{{floatval($item->quantity)}}" step="0.01" min="0">
+								</td>
+								<td class="value_extra_hour">{{$item->expense_jobable->value_extra_hour}}</td>
+								<td class="quantity_extra">
+									<input type="number" onclick="select();" name="Employee[quantity_extra][]" value="{{floatval($item->quantity_extra)}}" step="0.01" min="0">
+								</td>
+								<td class="total">{{$item->total}} €</td>
+								<td class="delete-cell"><button type="button" data-id="{{$item->id}}" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td>
+							</tr>
+							@endforeach
+						</tbody>
 
-				</table>
-				<hr>
-				<h4 class="text-center">Ganhos</h4>
-				<table class="table job-table" id="jobItemsProfits">
-					
-					<thead>
-						<tr>
-							<th>Número</th>
-							<th>Data</th>
-							<th>Total</th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach($job->job_profits as $item)
-						<tr>
-							<td><input type="text" name="Profit[number][]" value="{{$item->number}}"></td>
-							<td><input type="date" name="Profit[date][]" value="{{$item->date}}"></td>
-							<td><input type="number" name="Profit[total][]" value="{{$item->total}}"><input type="hidden" name="Profit[profit_id][]" value="{{$item->id}}"></td>
-							<td class="delete-cell"><button type="button" data-id="{{$item->id}}" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td>
-						</tr>
-						@endforeach
-					</tbody>
-				</table>
+					</table>
+				</div>
+				<hr class="my-5">
+				<div class="wrapper">
+					<h4 class="text-center">Ganhos</h4>
+					<table class="table job-table" id="jobItemsProfits">
+						
+						<thead>
+							<tr>
+								<th>Número</th>
+								<th>Data</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($job->job_profits as $item)
+							<tr>
+								<td><input type="text" name="Profit[number][]" value="{{$item->number}}"></td>
+								<td><input type="date" name="Profit[date][]" value="{{$item->date}}"></td>
+								<td><input type="number" name="Profit[total][]" value="{{$item->total}}"><input type="hidden" name="Profit[profit_id][]" value="{{$item->id}}"></td>
+								<td class="delete-cell"><button type="button" data-id="{{$item->id}}" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div>
 				<div class="text-center mt-3">
 					<button type="button" class="btn btn-primary mr-3" data-toggle="modal" data-target="#addExpensesModal"><i class="far fa-plus-square mr-2"></i>Gasto</button>
 					<button type="button" class="btn btn-primary mr-3 addProfitButton"><i class="far fa-plus-square mr-2"></i>Ganho</button>
