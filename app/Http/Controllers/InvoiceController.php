@@ -101,11 +101,14 @@ class InvoiceController extends Controller
     {
         $data = Invoice::findOrFail($id);
         $pdf = PDF::loadView('invoices.pdf', compact('data'));
-        return $pdf->download('invoice.pdf');
+        return $pdf->download('FATURA_'.$data->number.'_'.$data->date.'.pdf');
     }
 
     public function exportExcel($id)
     {
-        return Excel::download(new InvoiceExport, 'fatura.xlsx');
+        $invoice = Invoice::findOrFail($id);
+        $name = 'FATURA_'.$invoice->number.'_'.$invoice->date.'.xlsx';
+        $name = str_replace('/', '-', $name);
+        return Excel::download(new InvoiceExport($invoice), $name);
     }
 }

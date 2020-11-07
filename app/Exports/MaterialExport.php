@@ -2,27 +2,26 @@
 
 namespace App\Exports;
 
-use App\Invoice;
+use App\Material;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class InvoiceExport implements FromView, ShouldAutoSize
+class MaterialExport implements FromView, ShouldAutoSize
 {
-	protected $invoice;
+    protected $materials;
 
-    public function __construct($invoice)
+    public function __construct($materials)
     {
-        $this->invoice = $invoice;
+        $this->materials = $materials;
     }
     /**
     * @return \Illuminate\Support\Collection
     */
     public function view(): View
     {
-        return view('invoices.excel', [
-            'data' => $this->invoice
+        return view('materials.excel', [
+            'data' => $this->materials
         ]);
     }
-
 }

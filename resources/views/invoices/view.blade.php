@@ -53,7 +53,7 @@ use App\Job;
 	</div>
 </aside>
 <div class="col-10">
-	<div class="container-fluid py-3">
+	<div class="container-fluid py-3 px-0">
 		<h1 class="mb-3 text-center">Elementos da Fatura</h1>
 		<div class="toolbar text-right">
 	        <a href="{{ route('invoices.index') }}">Voltar</a>    
@@ -77,15 +77,15 @@ use App\Job;
 								<th>Preço Unitário</th>
 								<th style="width: 180px;">Desconto</th>
 								<th>IVA</th>
-								<th>Total</th>
-								<th>Obra</th>
+								<th class="total">Total</th>
+								<th class="job">Obra</th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach($invoice->invoice_items as $item)
 							<tr>
 								<td class="reference">{{$item->material->reference}}<input type="hidden" name="material_id[]" value="{{$item->material->id}}"></td>
-								<td class="name">{{$item->material->name}}<input type="hidden" name="item_id[]" value="{{$item->id}}"></td>
+								<td class="name"><textarea class="description" name="description[]">{{$item->description}}</textarea><input type="hidden" name="item_id[]" value="{{$item->id}}"></td>
 								<td class="unity">{{$item->material->unity->name}}</td>
 								<td class="quantity">
 									<input type="number" class="quantity-input" data-id="{{$item->material->id}}" onclick="select();" name="quantity[]" value="{{floatval($item->quantity)}}" step="0.01" min="0">
@@ -93,9 +93,9 @@ use App\Job;
 								<td class="price">{{$item->material->price}}</td>
 								<td class="discount"><input type="number" class="material-discount" min=0 onclick="select();" name="discount_1[]" value="{{floatval($item->discount_1)}}"> + <input type="number" name="discount_2[]" class="extra-discount" min=0 onclick="select();" value="{{floatval($item->discount_2)}}"></td>
 								<td class="tax">{{$item->material->tax}}</td>
-								<td class="total">{{$item->total()}} €</td>
+								<td class="total">{{number_format($item->total(),2)}} €</td>
 								<td class="job"><select class="job-select" name="job[]">{!! Job::dropdownSelect($item->job_id) !!}</select></td>
-								<td><button type="button" data-id="{{$item->id}}" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td>
+								<td class="actions"><button type="button" data-id="{{$item->id}}" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button><button type="button" class="insert-here btn btn-primary" onclick="setRow(this);"><i class="far fa-plus-square"></i></button></td>
 							</tr>
 							@endforeach
 						</tbody>
@@ -149,6 +149,13 @@ use App\Job;
 	<script type="text/javascript">
 		var jobsArray = [];
 		var jobsDropdown = '<option value=""></option>';
+		var insertAt = null;
+
+		function setRow(el)
+		{
+			insertAt = el.parentElement.parentElement.rowIndex;
+			$('#createMaterialModal').modal('show');
+		}
 		function insertMaterial(el)
 		{
 			var row = el.closest('tr');
@@ -162,9 +169,16 @@ use App\Job;
 				tax: row.querySelector('.tax').textContent
 			}
 
-			var html = '<tr><td class="reference">'+material.reference+'<input type="hidden" name="material_id[]" value="'+material.id+'"></td><td class="name">'+material.name+'<input type="hidden" name="item_id[]" value="0"></td><td class="unity">'+material.unity+'</td><td class="quantity"><input type="number" class="quantity-input" onclick="select();" data-id="'+material.id+'" name="quantity[]" value="0" step="0.01" min="0"></td><td class="price">'+material.price+'</td><td class="discount"><input type="number" name="discount_1[]" class="material-discount" value='+material.discount+' onclick="select();" data-id="'+material.id+'" min="0"> + <input type="number" value=0 onclick="select();" name="discount_2[]" class="extra-discount" data-id="'+material.id+'" min="0"></td><td class="tax">'+material.tax+'</td><td class="total">0,00 €</td><td><select class="job-select" name="job[]">'+jobsDropdown+'</select></td><td><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td></tr>';
-			$('#invoiceItems tbody').append(html);
-			
+			var html = '<tr><td class="reference">'+material.reference+'<input type="hidden" name="material_id[]" value="'+material.id+'"></td><td class="name"><textarea class="description" name="description[]">'+material.name+'</textarea><input type="hidden" name="item_id[]" value="0"></td><td class="unity">'+material.unity+'</td><td class="quantity"><input type="number" class="quantity-input" onclick="select();" data-id="'+material.id+'" name="quantity[]" value="0" step="0.01" min="0"></td><td class="price">'+material.price+'</td><td class="discount"><input type="number" name="discount_1[]" class="material-discount" value='+material.discount+' onclick="select();" data-id="'+material.id+'" min="0"> + <input type="number" value=0 onclick="select();" name="discount_2[]" class="extra-discount" data-id="'+material.id+'" min="0"></td><td class="tax">'+material.tax+'</td><td class="total">0,00 €</td><td class="job"><select class="job-select" name="job[]">'+jobsDropdown+'</select></td><td class="actions"><button type="button" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button><button type="button" class="insert-here btn btn-primary" onclick="setRow(this);"><i class="far fa-plus-square"></i></button></td></tr>';
+			if (insertAt != null){
+				var table = document.getElementById('invoiceItems');
+				var row = table.insertRow(insertAt+1);
+				row.innerHTML = html;
+				insertAt = null;
+			}else{
+				$('#invoiceItems tbody').append(html);	
+			}
+				
 		}
 
 		$(document).ready(function(){

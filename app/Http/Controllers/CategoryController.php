@@ -65,6 +65,9 @@ class CategoryController extends Controller
     {
         $id = $request['id'];
         $category = Category::findOrFail($id);
+        if (count($category->materials) > 0){
+            return ['msg' => 'A categoria tem materiais associados!'];
+        }
         $category->delete();
         return ['msg' => 'A categoria foi eliminada'];
     }

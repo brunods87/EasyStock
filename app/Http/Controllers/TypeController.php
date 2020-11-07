@@ -65,6 +65,9 @@ class TypeController extends Controller
     {
         $id = $request['id'];
         $type = Type::findOrFail($id);
+        if (count($type->materials) > 0){
+            return ['msg' => 'O tipo tem materiais associados!'];
+        }
         $type->delete();
         return ['msg' => 'O tipo foi eliminado'];
     }

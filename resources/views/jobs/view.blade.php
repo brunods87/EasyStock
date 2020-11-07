@@ -89,9 +89,10 @@
 						</thead>
 						<tbody>
 							@foreach($job->materials() as $item)
+								@if(is_null($item->expense_jobable)) @continue @endif
 							<tr>
 								<td class="reference">{{$item->expense_jobable->material->reference}}<input type="hidden" name="Material[materialItem_id][]" value="{{$item->expense_jobable->id}}"></td>
-								<td class="name">{{$item->expense_jobable->material->name}}<input type="hidden" name="Material[expense_id][]" value="{{$item->id}}"></td>
+								<td class="name">{{$item->expense_jobable->description}}<input type="hidden" name="Material[expense_id][]" value="{{$item->id}}"></td>
 								<td class="unity">{{$item->expense_jobable->material->unity->name}}</td>
 								<td class="quantity">
 									<input type="number" onclick="select();" name="Material[quantity][]" value="{{floatval($item->quantity)}}" step="0.01" min="0">
@@ -99,7 +100,7 @@
 								<td>{{$item->expense_jobable->material->price}}</td>
 								<td>{{ number_format($item->expense_jobable->discountInvoiceJob(),2) }}</td>
 								<td class="total">{{number_format($item->expense_jobable->total(),2)}} €</td>
-								<td class="delete-cell"><button type="button" data-id="{{$item->id}}" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button></td>
+								<td class="delete-cell"><button type="button" title="Eliminar" data-id="{{$item->id}}" class="btn btn-danger delete-row"><i class="fas fa-trash"></i></button><a type="button" title="Fatura" class="edit btn btn-primary btn-sm ml-1" href="/invoices/view/{{$item->expense_jobable->invoice_id}}"><i class="fas fa-file-pdf"></i></a></td>
 							</tr>
 							@endforeach
 						</tbody>

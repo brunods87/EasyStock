@@ -31,26 +31,26 @@ class Material extends Model
                     ->label('Referência')
                     ->value($this->reference ?? '');
                 $fieldset->control('select', 'supplier_id')
-                    ->options(['0' => ''] + Supplier::pluck('name', 'id')->toArray())
+                    ->options(Supplier::pluck('name', 'id')->toArray())
                     ->label('Fornecedor')
                     ->value($this->supplier_id ?? '');
                 $fieldset->control('select', 'category_id')
-                    ->options(['0' => ''] + Category::pluck('name', 'id')->toArray())
+                    ->options(Category::pluck('name', 'id')->toArray())
                     ->label('Categoria')
                     ->value($this->category_id ?? '');
                 $fieldset->control('select', 'type_id')
-                    ->options(['0' => ''] + Type::pluck('name', 'id')->toArray())
+                    ->options(Type::pluck('name', 'id')->toArray())
                     ->label('Tipo')
                     ->value($this->type_id ?? '');
                 $attributes = [
-                    'step' => 0.01,
+                    'step' => 0.001,
                 ];
                 $fieldset->control('input:number', 'price')
                     ->label('Preço')
                     ->value($this->price ?? 0.00)
                     ->attributes($attributes);
                 $fieldset->control('select', 'unity_id')
-                    ->options(['0' => ''] + Unity::pluck('name', 'id')->toArray())
+                    ->options(Unity::pluck('name', 'id')->toArray())
                     ->label('Unidade')
                     ->value($this->unity_id ?? '');
                 $fieldset->control('input:number', 'discount')
@@ -76,9 +76,19 @@ class Material extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function job()
+    public function info()
     {
-    	return $this->job_expense->job;    
+        $jobExpenses = JobExpense::where('expense_type', 'App\InvoiceItem')->get();
+        $info = array();
+        foreach ($jobExpenses as $item) {
+            if ($item->expense_jobable->material_id == $this->id){
+                $data['name'] = $item->job->name;
+                $data['reference'] = $item->job->reference;
+                $data['quantity'] = $item->quantity;
+                $info[] = $data;
+            }
+        }
+    	return $info;    
     }
 
     public function supplier()
@@ -108,7 +118,7 @@ class Material extends Model
     public function isInUse()
     {
         $invoiceItems = InvoiceItem::where('material_id', $this->id)->get(); 
-        if (count($invoiceItems > 0)) return true;
+        if (count($invoiceItems) > 0) return true;
         return false;
     }
 

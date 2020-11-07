@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Employee;
+use App\Exports\JobExport;
 use App\InvoiceItem;
 use App\Job;
 use App\JobExpense;
 use App\JobProfit;
 use DataTables;
+use Excel;
 use Illuminate\Http\Request;
+use PDF;
 
 class JobController extends Controller
 {
@@ -19,7 +22,7 @@ class JobController extends Controller
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->editColumn('client_id', function($row){
-                        return $row->client->name;
+                        return $row->client ? $row->client->name : '';
                     })
                     ->addColumn('materials', function($row){
                         return count($row->job_expenses);
@@ -205,5 +208,19 @@ class JobController extends Controller
             }
         }
         return redirect('jobs/view/'.$job_id)->with('success', 'Folha de Obra guardada');
+    }
+
+    public function exportPdf($id)
+    {
+        $data = Job::findOrFail($id);
+        $pdf = PDF::loadView('jobs.pdf', compact('data'));
+        return $pdf->download('FOLHA_DE_OBRA_'.$data->name.'_'.$data->reference.'.pdf');
+    }
+
+    public function exportExcel($id)
+    {
+        $job = Job::findOrFail($id);
+        $name = 'FOLHA_DE_OBRA_'.$job->name.'_'.$job->reference.'.xlsx';
+        return Excel::download(new JobExport($job), $name);
     }
 }

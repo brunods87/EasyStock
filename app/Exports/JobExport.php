@@ -2,27 +2,26 @@
 
 namespace App\Exports;
 
-use App\Invoice;
+use App\Job;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class InvoiceExport implements FromView, ShouldAutoSize
+class JobExport implements FromView, ShouldAutoSize
 {
-	protected $invoice;
+	protected $job;
 
-    public function __construct($invoice)
+    public function __construct($job)
     {
-        $this->invoice = $invoice;
+        $this->job = $job;
     }
     /**
     * @return \Illuminate\Support\Collection
     */
     public function view(): View
     {
-        return view('invoices.excel', [
-            'data' => $this->invoice
+        return view('jobs.excel', [
+            'data' => $this->job
         ]);
     }
-
 }

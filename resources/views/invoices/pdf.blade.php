@@ -47,7 +47,7 @@
 	<h1 class="mt-0">{{$data->supplier->name}}</h1>	
 	<h4>NIF: {{$data->supplier->nif}}</h4>
 	
-	<table style="margin-left: auto;width: 40%;">
+	<table style="margin-left: auto;margin-right: -5px;width: 40%;">
 		<tbody style="border: 1px solid #000;">
 		<tr>
 			<th style="text-align: left;padding: 5px;">Fatura Nº</th>
@@ -79,9 +79,9 @@
 				<th>UNID</th>
 				<th>QTD</th>
 				<th>P. UNITÁRIO</th>
-				<th>DESC</th>
-				<th>TOTAL</th>
+				<th>DESCONTO</th>
 				<th>IVA</th>
+				<th>TOTAL</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -98,13 +98,13 @@
 			@foreach($data->invoice_items as $item)
 				<tr>
 					<td class="left">{{$item->material->reference}}</td>
-					<td class="left">{{$item->material->name}}</td>
+					<td class="left">{{$item->description}}</td>
 					<td class="right">{{$item->material->unity->name}}</td>
 					<td class="right">{{$item->quantity}}</td>
 					<td class="right">{{$item->material->price}}</td>
 					<td class="right">{{number_format($item->discount_1,0)}} + {{number_format($item->discount_2,0)}}</td>
-					<td class="right">{{number_format($item->total(),2,',','.')}} €</td>
 					<td class="right">{{$item->material->tax}}</td>
+					<td class="right">{{number_format($item->total(),2,',','.')}} €</td>
 				</tr>
 			@endforeach
 		</tbody>
@@ -113,7 +113,7 @@
 
 <div class="footer" style="margin-top: 30px;text-align: right;">
 	
-	<table style="margin-left: auto;width: 40%;">
+	<table style="margin-left: auto;margin-right: -5px;width: 40%;">
 		<tbody style="border: 1px solid #000;">
 		<tr>
 			<th class="left" style="text-align: left;">TOTAL ILÍQUIDO</th>

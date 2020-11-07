@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MaterialExport;
 use App\InvoiceItem;
 use App\Material;
 use DataTables;
+use Excel;
 use Illuminate\Http\Request;
+use PDF;
 
 class MaterialController extends Controller
 {
@@ -16,20 +19,21 @@ class MaterialController extends Controller
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->editColumn('supplier_id', function($row){
-                        return $row->supplier->name;
+                        return $row->supplier ? $row->supplier->name : '';
                     })
                     ->editColumn('unity_id', function($row){
-                        return $row->unity->name;
+                        return $row->unity ? $row->unity->name : '';
                     })
                     ->editColumn('type_id', function($row){
-                        return $row->type->name;
+                        return $row->type ? $row->type->name : '';
                     })
                     ->editColumn('category_id', function($row){
-                        return $row->category->name;
+                        return $row->category ? $row->category->name : '';
                     })
                     ->addColumn('action', function($row){
    
                            $btn = '<a href="'.route('materials.update', ['id' => $row->id]).'" title="Editar" class="edit btn btn-primary btn-sm mr-3"><i class="fas fa-edit"></i></a>';
+                           $btn .= '<a href="'.route('materials.exportMaterial', ['id' => $row->id]).'" title="Extrato" class="pdf btn btn-primary btn-sm mr-2"><i class="fas fa-file-pdf"></i></a>';
                             $btn .= '<a href="javascript:void(0)" data-id="'.$row->id.'" title="Eliminar" class="delete btn btn-primary btn-sm"><i class="fas fa-trash"></i></a>';
                             return $btn;
                     })
@@ -182,5 +186,25 @@ class MaterialController extends Controller
         $data = $request->post();
         $material = Material::findOrFail($data['id']);
         return $material->getDiscount();
+    }
+
+    public function exportPdf()
+    {
+        $data = Material::where('active', true)->get();
+        $pdf = PDF::loadView('materials.pdf', compact('data'));
+        return $pdf->download('materiais.pdf');
+    }
+    public function exportExcel()
+    {
+        $data = Material::where('active', true)->get();
+        $name = 'materiais.xlsx';
+        return Excel::download(new MaterialExport($data), $name);
+    }
+
+    public function exportMaterial($id)
+    {
+        $data = Material::findOrFail($id);
+        $pdf = PDF::loadView('materials.extractPdf', compact('data'));
+        return $pdf->download('materiais.pdf');
     }
 }

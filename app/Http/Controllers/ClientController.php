@@ -69,6 +69,9 @@ class ClientController extends Controller
     {
         $id = $request['id'];
         $client = Client::findOrFail($id);
+        if (count($client->jobs) > 0){
+            return ['msg' => 'O cliente tem obras associadas!'];
+        }
         $client->delete();
         return ['msg' => 'O cliente foi eliminado'];
     }

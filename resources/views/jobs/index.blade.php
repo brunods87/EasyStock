@@ -20,7 +20,7 @@
                 <th>Cliente</th>
                 <th>Data</th>
                 <th>Despesas</th>
-                <th width="100px">Action</th>
+                <th width="170px">Action</th>
 
             </tr>
 

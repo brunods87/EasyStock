@@ -16,7 +16,9 @@ class SettingController extends Controller
     public function update(Request $request)
     {
     	$data = $request->validate([
-    		'tax_value' => 'required|numeric'
+    		'tax_value_normal' => 'required|numeric',
+            'tax_value_reduced' => 'required|numeric',
+            'tax_value_intermediary' => 'required|numeric'
     	]);    
     	$settings = Setting::first();
     	$settings->update($data);

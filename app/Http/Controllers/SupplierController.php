@@ -69,6 +69,9 @@ class SupplierController extends Controller
     {
         $id = $request['id'];
         $supplier = Supplier::findOrFail($id);
+        if (count($supplier->materials) > 0){
+            return ['msg' => 'O fornecedor tem materiais associados!'];
+        }
         $supplier->delete();
         return ['msg' => 'O fornecedor foi eliminado'];
     }

@@ -80,6 +80,9 @@ a:hover{
 label{
 	margin-bottom: 0;
 }
+.table td {
+    padding: 0.75rem 0.5rem;
+}
 .view-table{
 
 	th{
@@ -107,6 +110,9 @@ label{
 }
 #invoiceItems td input{
 	width: 60px;
+}
+#invoiceItems td input.material-discount, #invoiceItems td input.extra-discount{
+	width: 50px;
 }
 .sidebar{
 	padding: 10px;
@@ -187,6 +193,22 @@ hr{
 }
 .dataTables_wrapper .dataTables_paginate{
 	margin-top: .5rem;
+}
+#jobItemsMaterials .delete-cell{
+	width: 100px;
+}
+#invoiceItems tr .job{
+	max-width: 280px;
+	width: 280px;
+}
+#invoiceItems tr .job select{
+	max-width: 100%;
+}
+#invoiceItems tr .total{
+	width: 100px;
+}
+#invoiceItems tr .actions{
+	width: 115px;
 }
 
 @media (min-width: 768px){

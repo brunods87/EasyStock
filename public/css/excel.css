@@ -1,0 +1,13 @@
+.center{
+	text-align: center;
+}
+.left{
+	text-align: left;
+}
+.right{
+	text-align: right;
+}
+table th{
+	font-weight: bold;
+	border: 1px solid #000;
+}

@@ -11,7 +11,12 @@
         <a href="{{ route('categories.index') }}"><i class="fas fa-list mr-3"></i>Categorias</a>    
         <a href="{{ route('materials.create') }}"><i class="far fa-plus-square mr-3"></i>Adicionar</a>    
     </div>
-    
+    <div class="extra-bar text-right mb-4">
+        
+        <a href="{{ route('materials.exportPdf') }}" class="mx-3"><i class="fas fa-download mr-2"></i> Exportar Materiais PDF</a>
+        <a href="{{ route('materials.exportExcel') }}" class="mx-3"><i class="fas fa-download mr-2"></i> Exportar Materiais EXCEL</a>
+
+    </div>
 
     <table class="table table-bordered data-table">
 

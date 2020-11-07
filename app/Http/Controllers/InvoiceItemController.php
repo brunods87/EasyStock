@@ -21,27 +21,33 @@ class InvoiceItemController extends Controller
 			if ($data['quantity'][$row] > 0){
 				$item_id = $data['item_id'][$row];
 				if ($item_id > 0){
-					$item = InvoiceItem::findOrFail($item_id);	
+					$item = InvoiceItem::findOrFail($item_id);
+					$material = $item->material;
 					if ($data['quantity'][$row] > $item->quantity && !$item->job_id){
 						$increment = $data['quantity'][$row] - $item->quantity;
-						$material = $item->material;
 						$material->stock += $increment;
-						$material->save();
 					}elseif($data['quantity'][$row] < $item->quantity && !$item->job_id){
 						$withraw = $item->quantity - $data['quantity'][$row];
-						$material = $item->material;
 						$material->stock -= $withraw;
-						$material->save();
+					}elseif($item->job_id && !$data['job'][$row]){
+						$material->stock += $data['quantity'][$row];
+						$item->job_expense->delete();
+					}elseif(!$item->job_id && $data['job'][$row]){
+						$material->stock -= $item->quantity;
+						if ($material->stock < 0) $material->stock = 0;
 					}
+					$material->save();
 				}else{
 					$item = new InvoiceItem();	
 					$item->invoice_id = $invoice_id;
 					$item->material_id = $data['material_id'][$row];
 				}
+				$item->description = $data['description'][$row];
 				$item->quantity = $data['quantity'][$row];
 				$item->discount_1 = $data['discount_1'][$row];
 				$item->discount_2 = $data['discount_2'][$row];
 				$item->job_id = $data['job'][$row];
+				$item->order = $row;
 				$item->save();
 				if ($item->job_id){
 					$item->linkJob();	
@@ -50,6 +56,7 @@ class InvoiceItemController extends Controller
 					$material->stock += $item->quantity;
 					$material->save();
 				}
+
 			}
 		}
 

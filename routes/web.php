@@ -37,6 +37,8 @@ Route::group( ['middleware' => 'auth' ], function()
 		Route::post('/jobs/getJobs', 'JobController@getJobs')->name('jobs.getJobs');
 		Route::post('/jobExpenses/destroy', 'JobExpenseController@destroy')->name('jobExpense.destroy');
 		Route::post('/jobProfits/destroy', 'JobProfitController@destroy')->name('jobProfit.destroy');
+		Route::get('/jobs/exportPdf/{id}', 'JobController@exportPdf')->name('jobs.exportPdf');
+		Route::get('/jobs/exportExcel/{id}', 'JobController@exportExcel')->name('jobs.exportExcel');
 
 	//MATERIALS
 	Route::get('/materials', 'MaterialController@index')->name('materials.index');
@@ -48,6 +50,9 @@ Route::group( ['middleware' => 'auth' ], function()
 	Route::get('/materials/insert', 'MaterialController@insert')->name('materials.insert');
 	Route::get('/materials/insertInJob/{job_id}', 'MaterialController@insertInJob')->name('materials.insertInJob');
 	Route::post('/materials/getDiscount', 'MaterialController@getDiscount')->name('materials.discount');
+	Route::get('/materials/exportPdf', 'MaterialController@exportPdf')->name('materials.exportPdf');
+	Route::get('/materials/exportExcel', 'MaterialController@exportExcel')->name('materials.exportExcel');
+	Route::get('/materials/exportMaterial/{id}', 'MaterialController@exportMaterial')->name('materials.exportMaterial');
 
 		//CATEGORIES
 		Route::get('/categories', 'CategoryController@index')->name('categories.index');
@@ -60,7 +65,7 @@ Route::group( ['middleware' => 'auth' ], function()
 		Route::get('/types', 'TypeController@index')->name('types.index');
 		Route::get('/types/create', 'TypeController@create')->name('types.create');
 		Route::post('/types/create', 'TypeController@store');
-		Route::get('/types/update{id}', 'TypeController@edit')->name('types.update');
+		Route::get('/types/update/{id}', 'TypeController@edit')->name('types.update');
 		Route::post('/types/update/{id}', 'TypeController@update');
 		Route::post('/types', 'TypeController@destroy');
 		//UNITIES

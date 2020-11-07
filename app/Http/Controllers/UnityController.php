@@ -67,6 +67,9 @@ class UnityController extends Controller
     {
         $id = $request['id'];
         $unity = Unity::findOrFail($id);
+        if (count($unity->materials) > 0){
+            return ['msg' => 'A unidade tem materiais associados!'];
+        }
         $unity->delete();
         return ['msg' => 'A unidade foi eliminada'];
     }
